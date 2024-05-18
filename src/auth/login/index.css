@@ -1,0 +1,11 @@
+.custom_buttom {
+  width: 100%;
+  border-radius: 40px;
+  border: none;
+  padding: 7px;
+}
+
+.conditionaly_back {
+  background-color: #73b70a;
+  color: white;
+}
