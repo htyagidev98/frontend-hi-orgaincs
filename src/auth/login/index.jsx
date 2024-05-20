@@ -5,11 +5,21 @@ import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import "./index.css";
 import { toast } from "react-toastify";
+import usePostData from "../../customHooks/usePostData";
+import { BASE_URL } from "../../utils/helper";
+import ApiEndPoint from "../../utils/apiEnpPoint";
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  const { loading, error, responseData, postData } = usePostData(
+    `${BASE_URL}${ApiEndPoint.Login}`
+  );
+
+  console.log(error);
+
   const navigate = useNavigate();
   const [eye, setEye] = useState(false);
   const [formError, setFormError] = useState({
@@ -70,9 +80,9 @@ const Login = () => {
         passwordError: "Password is required",
       });
     } else {
-      console.log(formData);
-      navigate("/");
-      toast.success("Looged in Successfully");
+      postData(formData);
+      // navigate("/");
+      // toast.success("Looged in Successfully");
     }
   };
   return (
