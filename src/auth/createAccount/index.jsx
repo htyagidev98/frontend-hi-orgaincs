@@ -1,11 +1,17 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { NavLink, useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../utils/helper";
+import ApiEndPoint from "../../utils/apiEnpPoint";
+import { toast } from "react-toastify";
+import ButtonLoader from "../../component/buttonLoader";
 
 const CreateAccount = () => {
   const [formData, setFormData] = useState({
     emailorpassword: "",
   });
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [formError, setFormError] = useState({
     emailorpasswordError: "",
@@ -32,7 +38,7 @@ const CreateAccount = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.emailorpassword) {
       setFormError({
@@ -40,8 +46,31 @@ const CreateAccount = () => {
         emailorpasswordError: "Email or password is required",
       });
     } else {
-      console.log(formData, "response from createpassword");
-      navigate("/enterotp");
+      if (formData.emailorpassword) {
+        const payload = {
+          user: formData.emailorpassword,
+        };
+        try {
+          setLoading(true);
+          const res = await axios.post(
+            `${BASE_URL}${ApiEndPoint.CreateAccount}`,
+            payload
+          );
+          setLoading(false);
+          if (res.status === 200) {
+            toast.success(res?.data?.message);
+            navigate("/enterotp", {
+              state: {
+                main: res.data?.data?.user_id,
+              },
+            });
+          }
+        } catch (error) {
+          toast.error(error?.response?.data?.message);
+          setLoading(false);
+          console.log(error, "error");
+        }
+      }
     }
   };
   return (
@@ -78,7 +107,7 @@ const CreateAccount = () => {
             }
             type="submit"
           >
-            Send Otp
+            {loading ? <ButtonLoader /> : "Send Otp"}
           </button>
           <div className="d-flex justify-content-center mt-3">
             <span>Already have account?</span>

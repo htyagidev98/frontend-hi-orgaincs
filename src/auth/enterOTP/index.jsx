@@ -1,13 +1,20 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../utils/helper";
+import ApiEndPoint from "../../utils/apiEnpPoint";
+import ButtonLoader from "../../component/buttonLoader";
+import { toast } from "react-toastify";
 
 const EnterOTP = () => {
+  const { state } = useLocation();
   const [formData, setFormData] = useState({
+    user_id: state?.main,
     otp: "",
   });
   const navigate = useNavigate();
-
+  const [loading, setLoading] = useState(false);
   const [formError, setFormError] = useState({
     otpError: "",
   });
@@ -33,7 +40,7 @@ const EnterOTP = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.otp) {
       setFormError({
@@ -41,8 +48,24 @@ const EnterOTP = () => {
         otpError: "OTP is required",
       });
     } else {
-      console.log(formData, "res from enter otp");
-      navigate("/signup");
+      if (formData.otp && formData.user_id) {
+        try {
+          setLoading(true);
+          const res = await axios.post(
+            `${BASE_URL}${ApiEndPoint.VarifyOtp}`,
+            formData
+          );
+          setLoading(false);
+          if (res.status === 200) {
+            toast.success(res?.data?.message);
+          }
+        } catch (error) {
+          toast.error(error?.response?.data?.message);
+          setLoading(false);
+          console.log(error, "error");
+        }
+      }
+      // navigate("/signup");
     }
   };
   return (
@@ -79,8 +102,8 @@ const EnterOTP = () => {
             }
             type="submit"
           >
-            <span> Send Otp </span>{" "}
-            <span className="ms-3"> 20 seconds left</span>
+            <span>{loading ? <ButtonLoader /> : "Send Otp"} </span>{" "}
+            <span className="ms-3 d-none"> 20 seconds left</span>
           </button>
         </Form>
       </div>

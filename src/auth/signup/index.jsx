@@ -5,6 +5,10 @@ import { FaEyeSlash } from "react-icons/fa";
 import "./index.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import axios from "axios";
+import { BASE_URL } from "../../utils/helper";
+import ApiEndPoint from "../../utils/apiEnpPoint";
+import ButtonLoader from "../../component/buttonLoader";
 const Signup = () => {
   const [formData, setFormData] = useState({
     full_name: "",
@@ -13,6 +17,7 @@ const Signup = () => {
     date_of_birth: "",
     confirm_password: "",
   });
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [eye, setEye] = useState({
     password: false,
@@ -99,7 +104,7 @@ const Signup = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (
       !formData.password &&
@@ -147,9 +152,36 @@ const Signup = () => {
         confirm_passwordError: "Password and confirm password must match",
       });
     } else {
-      console.log(formData, "res from signup");
-      navigate("/login");
-      toast.success("Registration successfull");
+      if (
+        formData.full_name &&
+        formData.password &&
+        formData.confirm_password &&
+        formData.date_of_birth &&
+        formData.gender
+      ) {
+        try {
+          setLoading(true);
+          const payload = {
+            user_id: "664b8bd409f11592fd513e05",
+            password: formData?.password,
+            name: formData?.full_name,
+            gender: formData?.gender,
+            dateOfBirth: formData?.date_of_birth,
+          };
+          const res = await axios.post(
+            `${BASE_URL}${ApiEndPoint.Signup}`,
+            payload
+          );
+          if (res.status === 200) {
+            toast.success(res.data);
+            navigate("/login");
+          }
+          setLoading(false);
+        } catch (error) {
+          toast.error(error?.response?.data?.message);
+          setLoading(false);
+        }
+      }
     }
   };
   const handleToggleEye = (field) => {
@@ -277,7 +309,7 @@ const Signup = () => {
             }
             type="submit"
           >
-            Submit
+            {loading ? <ButtonLoader /> : "Submit"}
           </button>
         </Form>
       </div>
