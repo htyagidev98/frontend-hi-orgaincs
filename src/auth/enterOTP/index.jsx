@@ -58,14 +58,17 @@ const EnterOTP = () => {
           setLoading(false);
           if (res.status === 200) {
             toast.success(res?.data?.message);
+            navigate("/signup", {
+              state: {
+                main: res.data?.data?.user_id,
+              },
+            });
           }
         } catch (error) {
           toast.error(error?.response?.data?.message);
           setLoading(false);
-          console.log(error, "error");
         }
       }
-      // navigate("/signup");
     }
   };
   return (

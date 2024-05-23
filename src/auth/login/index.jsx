@@ -5,21 +5,16 @@ import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import "./index.css";
 import { toast } from "react-toastify";
-import usePostData from "../../customHooks/usePostData";
 import { BASE_URL } from "../../utils/helper";
 import ApiEndPoint from "../../utils/apiEnpPoint";
+import axios from "axios";
+import ButtonLoader from "../../component/buttonLoader";
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-
-  const { loading, error, responseData, postData } = usePostData(
-    `${BASE_URL}${ApiEndPoint.Login}`
-  );
-
-  console.log(error);
-
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [eye, setEye] = useState(false);
   const [formError, setFormError] = useState({
@@ -61,7 +56,7 @@ const Login = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.email && !formData.password) {
       setFormError({
@@ -80,9 +75,28 @@ const Login = () => {
         passwordError: "Password is required",
       });
     } else {
-      postData(formData);
-      // navigate("/");
-      // toast.success("Looged in Successfully");
+      if (formData.email && formData.password) {
+        const payload = {
+          user: formData.email,
+          password: formData.password,
+        };
+        try {
+          setLoading(true);
+          const res = await axios.post(
+            `${BASE_URL}${ApiEndPoint.Login}`,
+            payload
+          );
+          setLoading(false);
+          if (res.status === 200) {
+            toast.success(res?.data?.message);
+            navigate("/");
+          }
+        } catch (error) {
+          toast.error(error?.response?.data?.message);
+          setLoading(false);
+          console.log(error, "error");
+        }
+      }
     }
   };
   return (
@@ -148,7 +162,7 @@ const Login = () => {
             }
             type="submit"
           >
-            Login
+            {loading ? <ButtonLoader /> : "Login"}
           </button>
           <div className="d-flex justify-content-center mt-3">
             <span>Don't have account?</span>

@@ -3,13 +3,14 @@ import { Form } from "react-bootstrap";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import "./index.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { BASE_URL } from "../../utils/helper";
 import ApiEndPoint from "../../utils/apiEnpPoint";
 import ButtonLoader from "../../component/buttonLoader";
 const Signup = () => {
+  const { state } = useLocation();
   const [formData, setFormData] = useState({
     full_name: "",
     gender: "",
@@ -162,13 +163,13 @@ const Signup = () => {
         try {
           setLoading(true);
           const payload = {
-            user_id: "664b8bd409f11592fd513e05",
+            user_id: state?.main,
             password: formData?.password,
             name: formData?.full_name,
             gender: formData?.gender,
             dateOfBirth: formData?.date_of_birth,
           };
-          const res = await axios.post(
+          const res = await axios.put(
             `${BASE_URL}${ApiEndPoint.Signup}`,
             payload
           );
