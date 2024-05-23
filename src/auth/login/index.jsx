@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, Navigate, useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import "./index.css";
@@ -90,6 +90,7 @@ const Login = () => {
           if (res.status === 200) {
             toast.success(res?.data?.message);
             navigate("/");
+            localStorage.setItem("token", res?.data?.data?.accessToken);
           }
         } catch (error) {
           toast.error(error?.response?.data?.message);
