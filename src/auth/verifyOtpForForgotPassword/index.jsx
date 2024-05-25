@@ -1,21 +1,23 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../../utils/helper";
 import ApiEndPoint from "../../utils/apiEnpPoint";
-import { toast } from "react-toastify";
 import ButtonLoader from "../../component/buttonLoader";
+import { toast } from "react-toastify";
 import bgImage from "../../assets/demofigmabg.png";
 import "./index.css";
-const CreateAccount = () => {
+const VerifyOtpForForgotPassword = () => {
+  const { state } = useLocation();
   const [formData, setFormData] = useState({
-    emailorpassword: "",
+    user_id: state?.main,
+    otp: "",
   });
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [formError, setFormError] = useState({
-    emailorpasswordError: "",
+    otpError: "",
   });
 
   const handleChange = (e) => {
@@ -24,16 +26,16 @@ const CreateAccount = () => {
       ...formData,
       [name]: value,
     });
-    if (name === "emailorpassword") {
+    if (name === "otp") {
       if (value.length > 0) {
         setFormError({
           ...formError,
-          emailorpasswordError: "",
+          otpError: "",
         });
       } else {
         setFormError({
           ...formError,
-          emailorpasswordError: "Email or password is required",
+          otpError: "OTP is required",
         });
       }
     }
@@ -41,26 +43,23 @@ const CreateAccount = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.emailorpassword) {
+    if (!formData.otp) {
       setFormError({
         ...formError,
-        emailorpasswordError: "Email or password is required",
+        otpError: "OTP is required",
       });
     } else {
-      if (formData.emailorpassword) {
-        const payload = {
-          user: formData.emailorpassword,
-        };
+      if (formData.otp && formData.user_id) {
         try {
           setLoading(true);
           const res = await axios.post(
-            `${BASE_URL}${ApiEndPoint.CreateAccount}`,
-            payload
+            `${BASE_URL}${ApiEndPoint.VarifyOtp}`,
+            formData
           );
           setLoading(false);
           if (res.status === 200) {
             toast.success(res?.data?.message);
-            navigate("/verifyotpforcreateaccount", {
+            navigate("/signup", {
               state: {
                 main: res.data?.data?.user_id,
               },
@@ -69,18 +68,17 @@ const CreateAccount = () => {
         } catch (error) {
           toast.error(error?.response?.data?.message);
           setLoading(false);
-          console.log(error, "error");
         }
       }
     }
   };
   return (
-    <div className="createaccount_wrapper">
+    <div className="otpWrapperforforgotpassword">
       <div
         className={
-          formError.emailorpasswordError
-            ? "form_container  rounded p-4 border-danger"
-            : " form_container rounded p-4"
+          formError.otpError
+            ? "form_container border rounded p-4 border-danger"
+            : " form_container  rounded p-4"
         }
         style={{
           width: "500px",
@@ -88,42 +86,46 @@ const CreateAccount = () => {
           backgroundColor: "#fff",
         }}
       >
-        <h4 className="text-center mb-3">Create Account </h4>
+        <h4 className="text-center mb-3">Enter OTP </h4>
         <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3 mt-5" controlId="formBasicEmail">
             <Form.Control
-              type="text"
-              name="emailorpassword"
-              value={formData.emailorpassword}
+              type="number"
+              name="otp"
+              value={formData.otp}
               onChange={handleChange}
-              placeholder="Email or Phone Number"
-              className={formError.emailorpasswordError ? "border-danger" : ""}
+              placeholder="Enter OTP"
+              className={formError.otpError ? "border-danger" : ""}
             />
           </Form.Group>
-          {formError.emailorpasswordError && (
-            <p className="text-danger">{formError.emailorpasswordError} </p>
+          <span style={{ color: "#464F43", fontWeight: "bold" }}>
+            {" "}
+            20 seconds left{" "}
+          </span>
+          {formError.otpError && (
+            <p className="text-danger">{formError.otpError} </p>
           )}
 
           <button
             className={
-              formError.emailorpasswordError
-                ? "custom_buttom bg-danger text-white"
-                : "custom_buttom conditionaly_back text-white"
+              formError.otpError
+                ? "custom_buttom bg-danger text-white mt-5"
+                : "custom_buttom conditionaly_back text-white mt-5"
             }
             type="submit"
           >
-            {loading ? <ButtonLoader /> : "Send Otp"}
+            <span>{loading ? <ButtonLoader /> : "Verify OTP"} </span>{" "}
           </button>
-          <div className="d-flex justify-content-center mt-3">
-            <span>Already have account?</span>
-            <NavLink to="/login" className={"nav-link fw-bold ms-2"}>
-              Login
-            </NavLink>
-          </div>
+          <button
+            className={"custom_buttom  conditionaly_back text-white mt-3"}
+            type="submit"
+          >
+            <span>{loading ? <ButtonLoader /> : "Resend Otp"} </span>{" "}
+          </button>
         </Form>
       </div>
     </div>
   );
 };
 
-export default CreateAccount;
+export default VerifyOtpForForgotPassword;

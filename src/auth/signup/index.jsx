@@ -9,6 +9,8 @@ import axios from "axios";
 import { BASE_URL } from "../../utils/helper";
 import ApiEndPoint from "../../utils/apiEnpPoint";
 import ButtonLoader from "../../component/buttonLoader";
+import bgImage from "../../assets/demofigmabg.png";
+
 const Signup = () => {
   const { state } = useLocation();
   const [formData, setFormData] = useState({
@@ -189,7 +191,7 @@ const Signup = () => {
     setEye({ ...eye, [field]: !eye[field] });
   };
   return (
-    <div className="signupWrapper vh-100 d-flex justify-content-center align-items-center">
+    <div className="signupWrapper">
       <div
         className={
           formError.full_nameError ||
@@ -197,10 +199,14 @@ const Signup = () => {
           formError.confirm_passwordError ||
           formError.date_of_birthError ||
           formError.genderError
-            ? "form_container border rounded p-4 border-danger"
-            : " form_container border rounded p-4"
+            ? "form_container  rounded p-4 border-danger"
+            : " form_container  rounded p-4"
         }
-        style={{ width: "500px" }}
+        style={{
+          width: "500px",
+          border: "1px solid #92BAF5",
+          backgroundColor: "#fff",
+        }}
       >
         <h4 className="text-center mb-3">REGISTRATION FORM </h4>
         <Form onSubmit={handleSubmit}>

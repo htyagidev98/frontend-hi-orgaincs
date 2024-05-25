@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
-import { NavLink, Navigate, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import "./index.css";
@@ -9,6 +9,7 @@ import { BASE_URL } from "../../utils/helper";
 import ApiEndPoint from "../../utils/apiEnpPoint";
 import axios from "axios";
 import ButtonLoader from "../../component/buttonLoader";
+import bgImage from "../../assets/demofigmabg.png";
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -101,14 +102,18 @@ const Login = () => {
     }
   };
   return (
-    <div className="loginWrapper vh-100 d-flex justify-content-center align-items-center">
+    <div className="loginWrapper">
       <div
         className={
           formError.emailError || formError.passwordError
-            ? "form_container border rounded p-4 border-danger"
-            : " form_container border rounded p-4"
+            ? "form_container  rounded p-4 border-danger"
+            : " form_container  rounded p-4"
         }
-        style={{ width: "500px" }}
+        style={{
+          width: "500px",
+          border: "1px solid #92BAF5",
+          backgroundColor: "#fff",
+        }}
       >
         <h4 className="text-center mb-3">Sign In </h4>
         <Form onSubmit={handleSubmit}>
@@ -155,6 +160,7 @@ const Login = () => {
               Forgot Password
             </NavLink>
           </div>
+
           <button
             className={
               formError.emailError || formError.passwordError
@@ -165,6 +171,14 @@ const Login = () => {
           >
             {loading ? <ButtonLoader /> : "Login"}
           </button>
+          <NavLink className={"nav-link"} to="/loginwithotp">
+            <button
+              className="custom_buttom mt-3"
+              style={{ backgroundColor: "#155501", color: "#fff" }}
+            >
+              Login With OTP{" "}
+            </button>
+          </NavLink>
           <div className="d-flex justify-content-center mt-3">
             <span>Don't have account?</span>
             <NavLink to="/createaccount" className={"nav-link fw-bold ms-2"}>

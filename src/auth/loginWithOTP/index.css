@@ -1,4 +1,4 @@
-.signupWrapper {
+.formgotpassWrapper {
   position: relative;
   width: 100%;
   height: 100vh;
@@ -7,7 +7,7 @@
   align-items: center;
 }
 
-.signupWrapper::before {
+.formgotpassWrapper::before {
   content: "";
   position: absolute;
   top: 0;
@@ -22,8 +22,8 @@
   z-index: -1; /* Ensure the pseudo-element is behind the content */
 }
 
-/* Ensure content within the signupWrapper is positioned correctly */
-.signupWrapper > * {
+/* Ensure content within the formgotpassWrapper is positioned correctly */
+.formgotpassWrapper > * {
   position: relative;
   z-index: 1;
 }

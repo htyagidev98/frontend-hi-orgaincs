@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import ButtonLoader from "../../component/buttonLoader";
 import bgImage from "../../assets/demofigmabg.png";
 import "./index.css";
-const CreateAccount = () => {
+const LoginWithOTP = () => {
   const [formData, setFormData] = useState({
     emailorpassword: "",
   });
@@ -48,39 +48,17 @@ const CreateAccount = () => {
       });
     } else {
       if (formData.emailorpassword) {
-        const payload = {
-          user: formData.emailorpassword,
-        };
-        try {
-          setLoading(true);
-          const res = await axios.post(
-            `${BASE_URL}${ApiEndPoint.CreateAccount}`,
-            payload
-          );
-          setLoading(false);
-          if (res.status === 200) {
-            toast.success(res?.data?.message);
-            navigate("/verifyotpforcreateaccount", {
-              state: {
-                main: res.data?.data?.user_id,
-              },
-            });
-          }
-        } catch (error) {
-          toast.error(error?.response?.data?.message);
-          setLoading(false);
-          console.log(error, "error");
-        }
+        console.log(formData.emailorpassword);
       }
     }
   };
   return (
-    <div className="createaccount_wrapper">
+    <div className="formgotpassWrapper">
       <div
         className={
           formError.emailorpasswordError
             ? "form_container  rounded p-4 border-danger"
-            : " form_container rounded p-4"
+            : " form_container  rounded p-4"
         }
         style={{
           width: "500px",
@@ -88,15 +66,15 @@ const CreateAccount = () => {
           backgroundColor: "#fff",
         }}
       >
-        <h4 className="text-center mb-3">Create Account </h4>
+        <h4 className="text-center mb-3">Otp Sign in</h4>
         <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-3 mt-5" controlId="formBasicEmail">
             <Form.Control
               type="text"
               name="emailorpassword"
               value={formData.emailorpassword}
               onChange={handleChange}
-              placeholder="Email or Phone Number"
+              placeholder="Phone Number Or Email"
               className={formError.emailorpasswordError ? "border-danger" : ""}
             />
           </Form.Group>
@@ -105,6 +83,7 @@ const CreateAccount = () => {
           )}
 
           <button
+            style={{ marginTop: "50px" }}
             className={
               formError.emailorpasswordError
                 ? "custom_buttom bg-danger text-white"
@@ -112,18 +91,12 @@ const CreateAccount = () => {
             }
             type="submit"
           >
-            {loading ? <ButtonLoader /> : "Send Otp"}
+            {loading ? <ButtonLoader /> : "Send OTP "}
           </button>
-          <div className="d-flex justify-content-center mt-3">
-            <span>Already have account?</span>
-            <NavLink to="/login" className={"nav-link fw-bold ms-2"}>
-              Login
-            </NavLink>
-          </div>
         </Form>
       </div>
     </div>
   );
 };
 
-export default CreateAccount;
+export default LoginWithOTP;

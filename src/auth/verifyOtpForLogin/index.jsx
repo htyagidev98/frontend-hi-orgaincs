@@ -6,8 +6,9 @@ import { BASE_URL } from "../../utils/helper";
 import ApiEndPoint from "../../utils/apiEnpPoint";
 import ButtonLoader from "../../component/buttonLoader";
 import { toast } from "react-toastify";
-
-const EnterOTP = () => {
+import bgImage from "../../assets/demofigmabg.png";
+import "./index.css";
+const VerifyOtpForLogin = () => {
   const { state } = useLocation();
   const [formData, setFormData] = useState({
     user_id: state?.main,
@@ -72,14 +73,18 @@ const EnterOTP = () => {
     }
   };
   return (
-    <div className="otpWrapper vh-100 d-flex justify-content-center align-items-center">
+    <div className="otpWrapperForLogin">
       <div
         className={
           formError.otpError
             ? "form_container border rounded p-4 border-danger"
-            : " form_container border rounded p-4"
+            : " form_container  rounded p-4"
         }
-        style={{ width: "500px" }}
+        style={{
+          width: "500px",
+          border: "1px solid #92BAF5",
+          backgroundColor: "#fff",
+        }}
       >
         <h4 className="text-center mb-3">Enter OTP </h4>
         <Form onSubmit={handleSubmit}>
@@ -93,6 +98,10 @@ const EnterOTP = () => {
               className={formError.otpError ? "border-danger" : ""}
             />
           </Form.Group>
+          <span style={{ color: "#464F43", fontWeight: "bold" }}>
+            {" "}
+            20 seconds left{" "}
+          </span>
           {formError.otpError && (
             <p className="text-danger">{formError.otpError} </p>
           )}
@@ -105,8 +114,13 @@ const EnterOTP = () => {
             }
             type="submit"
           >
-            <span>{loading ? <ButtonLoader /> : "Send Otp"} </span>{" "}
-            <span className="ms-3 d-none"> 20 seconds left</span>
+            <span>{loading ? <ButtonLoader /> : "Verify OTP"} </span>{" "}
+          </button>
+          <button
+            className={"custom_buttom  conditionaly_back text-white mt-3"}
+            type="submit"
+          >
+            <span>{loading ? <ButtonLoader /> : "Resend Otp"} </span>{" "}
           </button>
         </Form>
       </div>
@@ -114,4 +128,4 @@ const EnterOTP = () => {
   );
 };
 
-export default EnterOTP;
+export default VerifyOtpForLogin;

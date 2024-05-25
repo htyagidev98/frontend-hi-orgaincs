@@ -1,4 +1,16 @@
-.signupWrapper {
+.custom_buttom {
+  width: 100%;
+  border-radius: 40px;
+  border: none;
+  padding: 7px;
+}
+
+.conditionaly_back {
+  background-color: #00b207;
+  color: white;
+}
+
+.createnewpass_wrapper {
   position: relative;
   width: 100%;
   height: 100vh;
@@ -7,7 +19,7 @@
   align-items: center;
 }
 
-.signupWrapper::before {
+.createnewpass_wrapper::before {
   content: "";
   position: absolute;
   top: 0;
@@ -22,8 +34,8 @@
   z-index: -1; /* Ensure the pseudo-element is behind the content */
 }
 
-/* Ensure content within the signupWrapper is positioned correctly */
-.signupWrapper > * {
+/* Ensure content within the loginWrapper is positioned correctly */
+.createnewpass_wrapper > * {
   position: relative;
   z-index: 1;
 }
