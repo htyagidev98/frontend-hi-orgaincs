@@ -25,9 +25,7 @@ const App = () => {
           path="/verifyotpforforgotpassword"
           element={<VerifyOtpForForgotPassword />}
         />
-
         <Route path="/verifyotpforlogin" element={<VerifyOtpForLogin />} />
-
         <Route path="/createnewpassword" element={<CreateNewPassword />} />
         <Route path="/createaccount" element={<CreateAccount />} />
         <Route

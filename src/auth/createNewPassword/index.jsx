@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import { toast } from "react-toastify";
@@ -8,13 +8,14 @@ import { BASE_URL } from "../../utils/helper";
 import ApiEndPoint from "../../utils/apiEnpPoint";
 import axios from "axios";
 import ButtonLoader from "../../component/buttonLoader";
-import bgImage from "../../assets/demofigmabg.png";
+import createnewpassword from "../../assets/createnewpassword.jfif";
 import "./index.css";
 const CreateNewPassword = () => {
   const [formData, setFormData] = useState({
     newpassword: "",
     confirmpassword: "",
   });
+  const { state } = useLocation();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [eye, setEye] = useState(false);
@@ -82,29 +83,33 @@ const CreateNewPassword = () => {
       });
     } else {
       if (formData.newpassword && formData.confirmpassword) {
-        console.log(formData, "create new password");
-        // try {
-        //   setLoading(true);
-        //   const res = await axios.post(
-        //     `${BASE_URL}${ApiEndPoint.Login}`,
-        //     payload
-        //   );
-        //   setLoading(false);
-        //   if (res.status === 200) {
-        //     toast.success(res?.data?.message);
-        //     navigate("/");
-        //     localStorage.setItem("token", res?.data?.data?.accessToken);
-        //   }
-        // } catch (error) {
-        //   toast.error(error?.response?.data?.message);
-        //   setLoading(false);
-        //   console.log(error, "error");
-        // }
+        const payload = {
+          user_id: state?.main,
+          password: formData?.newpassword,
+        };
+        try {
+          setLoading(true);
+          const res = await axios.post(
+            `${BASE_URL}${ApiEndPoint.PasswordSet}`,
+            payload
+          );
+          setLoading(false);
+          if (res.status === 200) {
+            toast.success(res?.data?.message);
+            navigate("/login");
+          }
+        } catch (error) {
+          toast.error(error?.response?.data?.message);
+          setLoading(false);
+          console.log(error, "error");
+        }
       }
     }
   };
   return (
     <div className="createnewpass_wrapper">
+      <img src={createnewpassword} height={197} width={380} className="mb-5" />
+
       <div
         className={
           formError.newpasswordError || formError.confirmpasswordError

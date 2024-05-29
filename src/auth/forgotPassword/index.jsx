@@ -6,7 +6,7 @@ import { BASE_URL } from "../../utils/helper";
 import ApiEndPoint from "../../utils/apiEnpPoint";
 import { toast } from "react-toastify";
 import ButtonLoader from "../../component/buttonLoader";
-import bgImage from "../../assets/demofigmabg.png";
+import bgImageforgot from "../../assets/pana.png";
 import "./index.css";
 const ForgotPassword = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +14,7 @@ const ForgotPassword = () => {
   });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
   const [formError, setFormError] = useState({
     emailorpasswordError: "",
   });
@@ -48,12 +49,34 @@ const ForgotPassword = () => {
       });
     } else {
       if (formData.emailorpassword) {
-        console.log(formData.emailorpassword);
+        const payload = {
+          user: formData.emailorpassword,
+        };
+        try {
+          setLoading(true);
+          const res = await axios.post(
+            `${BASE_URL}${ApiEndPoint.ForgotPassword}`,
+            payload
+          );
+          if (res.status === 200) {
+            toast.success(res.data?.message);
+            navigate("/verifyotpforforgotpassword", {
+              state: {
+                main: res.data?.data?.user_id,
+              },
+            });
+          }
+          setLoading(false);
+        } catch (error) {
+          toast.error(error?.response?.data?.message);
+          setLoading(false);
+        }
       }
     }
   };
   return (
     <div className="forgotpassword_wrapper">
+      <img src={bgImageforgot} height={200} width={423} className="mb-3" />
       <div
         className={
           formError.emailorpasswordError

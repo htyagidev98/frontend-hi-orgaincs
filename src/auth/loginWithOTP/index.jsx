@@ -6,7 +6,7 @@ import { BASE_URL } from "../../utils/helper";
 import ApiEndPoint from "../../utils/apiEnpPoint";
 import { toast } from "react-toastify";
 import ButtonLoader from "../../component/buttonLoader";
-import bgImage from "../../assets/demofigmabg.png";
+import bgImageforLoginOtp from "../../assets/otpsignin.png";
 import "./index.css";
 const LoginWithOTP = () => {
   const [formData, setFormData] = useState({
@@ -33,7 +33,7 @@ const LoginWithOTP = () => {
       } else {
         setFormError({
           ...formError,
-          emailorpasswordError: "Email or password is required",
+          emailorpasswordError: "Email or Phone Number is required",
         });
       }
     }
@@ -44,16 +44,39 @@ const LoginWithOTP = () => {
     if (!formData.emailorpassword) {
       setFormError({
         ...formError,
-        emailorpasswordError: "Email or password is required",
+        emailorpasswordError: "Email or phone number is required",
       });
     } else {
       if (formData.emailorpassword) {
-        console.log(formData.emailorpassword);
+        const payload = {
+          user: formData.emailorpassword,
+        };
+        try {
+          setLoading(true);
+          const res = await axios.post(
+            `${BASE_URL}${ApiEndPoint.LoginWithOtp}`,
+            payload
+          );
+          setLoading(false);
+          if (res.status === 200) {
+            toast.success(res?.data?.message);
+            navigate("/verifyotpforlogin", {
+              state: {
+                main: res.data?.data?.user_id,
+              },
+            });
+          }
+        } catch (error) {
+          toast.error(error?.response?.data?.message);
+          setLoading(false);
+          console.log(error, "error");
+        }
       }
     }
   };
   return (
     <div className="formgotpassWrapper">
+      <img src={bgImageforLoginOtp} height={197} width={380} className="mb-2" />
       <div
         className={
           formError.emailorpasswordError
