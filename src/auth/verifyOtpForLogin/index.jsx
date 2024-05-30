@@ -61,11 +61,8 @@ const VerifyOtpForLogin = () => {
           setLoading(false);
           if (res.status === 200) {
             toast.success(res?.data?.message);
-            // navigate("/signup", {
-            //   state: {
-            //     main: res.data?.data?.user_id,
-            //   },
-            // });
+            localStorage.setItem("token", res?.data?.data?.accessToken);
+            navigate("/");
           }
         } catch (error) {
           toast.error(error?.response?.data?.message);

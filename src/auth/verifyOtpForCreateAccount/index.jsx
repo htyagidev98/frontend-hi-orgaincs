@@ -130,7 +130,7 @@ const VerifyOtpForCreateAccount = () => {
             />
           </Form.Group>
 
-          {/*timeLeft > 0 ? (
+          {timeLeft > 0 ? (
             <span style={{ color: "#464F43", fontWeight: "bold" }}>
               {" "}
               {timeLeft} seconds left{" "}
@@ -142,7 +142,7 @@ const VerifyOtpForCreateAccount = () => {
           )}
           {formError.otpError && (
             <p className="text-danger">{formError.otpError} </p>
-          )*/}
+          )}
 
           <button
             className={
@@ -161,7 +161,7 @@ const VerifyOtpForCreateAccount = () => {
                 : "custom_buttom  conditionaly_back text-white mt-3"
             }
             type="submit"
-            disabled
+            disabled={isResendDisabled}
           >
             <span>{loading ? <ButtonLoader /> : "Resend Otp"} </span>{" "}
           </button>
