@@ -1,5 +1,12 @@
 import React from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+import Header from "../../common/header";
+import HeroSection from "../../component/heroSection";
+import CounterDataSection from "../../component/counterDataSection";
+import CategorySection from "../../component/categorySection";
+import EdibleProductSection from "../../component/edibleProductSection";
+import PlantAndDecorSection from "../../component/plantsAndDecorSection";
+import NewArrivalProducts from "../../component/newArrivalProducts";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -16,13 +23,14 @@ const Home = () => {
     }
   };
   return (
-    <div className="vh-100 d-flex align-items-center justify-content-center">
-      <div className="text-center">
-        <h1>&#128516; WELCOME TO DASHBOARD &#128515;</h1>
-        <button className="btn btn-danger mt-2" onClick={() => logoutHnadler()}>
-          Logout
-        </button>
-      </div>
+    <div className="home_wrapper">
+      <Header />
+      <HeroSection />
+      <CounterDataSection />
+      <CategorySection />
+      <EdibleProductSection />
+      <PlantAndDecorSection />
+      <NewArrivalProducts />
     </div>
   );
 };

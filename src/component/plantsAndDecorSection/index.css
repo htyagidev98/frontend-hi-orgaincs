@@ -1,0 +1,29 @@
+.plantAndDecorSection_wrapper {
+  padding: 35px;
+}
+
+.plantAndDecorSection_wrapper .product_head_color {
+  color: #b3a73a;
+}
+
+.plantAndDecorSection_wrapper .card_wrapper {
+  padding: 38px 0px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.plantAndDecorSection_wrapper .card_wrapper .inner img {
+  border-radius: 0px 8px 0px 8px;
+  width: 305px;
+  height: 361px;
+}
+
+.plantAndDecorSection_wrapper .card_wrapper .inner h6 {
+  text-align: center;
+  margin-top: 19px;
+  font-weight: 400;
+  font-size: 18px;
+  color: #000000;
+}

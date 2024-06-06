@@ -1,0 +1,39 @@
+.newArrivalProducts_wrapper {
+  padding: 35px;
+}
+
+.newArrivalProducts_wrapper .header_data {
+  display: flex;
+  align-items: center;
+}
+
+.newArrivalProducts_wrapper .header_data h2 {
+  font-weight: 400;
+  font-size: 36px;
+  color: #262626;
+  margin: 0 0 0 10px !important;
+}
+
+.newArrivalProducts_wrapper .card_wrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+  gap: 20px;
+}
+
+.newArrivalProducts_wrapper .card_wrapper .inner {
+  position: relative;
+}
+
+.newArrivalProducts_wrapper .card_wrapper .inner img {
+  width: 300px;
+  height: 400px;
+  margin-bottom: 10px;
+}
+
+.newArrivalProducts_wrapper .card_wrapper .inner h6 {
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: 0.6px;
+  color: #1a1b18;
+}

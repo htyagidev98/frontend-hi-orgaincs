@@ -1,0 +1,10 @@
+.hero_wrapper {
+  background-image: url("../../assets/herohome.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 464px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}

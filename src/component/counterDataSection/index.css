@@ -1,0 +1,19 @@
+.counterDataSection {
+  background-color: #00b207;
+  height: 198px;
+  padding: 0px 317px;
+  display: flex;
+  align-items: center;
+  border-top-left-radius: 60px;
+  border-top-right-radius: 60px;
+  margin-top: -60px;
+
+  background-image: url("../../assets/counterimage.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.counterDataSection h2 {
+  font-size: 56px !important;
+}
