@@ -12,9 +12,9 @@ const Home = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
-  if (!token) {
-    return <Navigate to="/login" />;
-  }
+  // if (!token) {
+  //   return <Navigate to="/login" />;
+  // }
 
   const logoutHnadler = () => {
     if (window.confirm("Are you sure you want to logout?")) {
