@@ -8,6 +8,7 @@ import { FaSearch } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
 import { FaPhoneVolume } from "react-icons/fa6";
+import { AiOutlineSetting } from "react-icons/ai";
 
 const Header = () => {
   return (
@@ -39,8 +40,27 @@ const Header = () => {
             <span>
               <TiShoppingCart size={25} />
             </span>
-            <NavLink className="nav-link fw-bold ms-3">Cart</NavLink>
+            <NavLink className="nav-link fw-bold ms-2">Cart</NavLink>
           </div>
+
+          <div className="cart_wrapper d-flex align-items-center ms-4">
+            <span>
+              <AiOutlineSetting size={25} />
+            </span>
+            <NavLink
+              className="nav-link fw-bold ms-2"
+              to={"/user/setting/userdetails"}
+            >
+              Setting
+            </NavLink>
+          </div>
+          <NavLink className={"nav-link fw-bold ms-3"} to="/seller/login">
+            Become a Seller
+          </NavLink>
+
+          <NavLink className={"nav-link fw-bold ms-3"} to="/login">
+            Login
+          </NavLink>
         </div>
       </div>
       <div className="end_header">

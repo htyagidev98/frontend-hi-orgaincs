@@ -1,0 +1,46 @@
+.userdetailsWrapper .form_wrapper button {
+  background-color: rgba(179, 167, 58, 1);
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  color: white;
+  padding: 6px 30px;
+  margin-top: 32px;
+}
+.userdetailsWrapper {
+  display: flex;
+  padding: 20px;
+}
+
+.userdetailsWrapper .uploadSection {
+  width: 20%;
+  cursor: pointer;
+}
+
+.userdetailsWrapper .form_wrapper {
+  width: 80%;
+}
+
+.userdetailsWrapper .uploadSection .inner_data {
+  width: 168px;
+  height: 175px;
+  border-radius: 5px;
+  border: 1px dashed rgba(193, 187, 235, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 7px;
+}
+
+.userdetailsWrapper .uploadSection .inner_data span {
+  font-weight: 400;
+  font-size: 14px;
+  text-align: center;
+  color: rgba(160, 152, 174, 1);
+}
+
+.userdetailsWrapper label {
+  color: rgba(48, 57, 114, 1) !important;
+  font-weight: 600 !important;
+  font-size: 18px;
+}

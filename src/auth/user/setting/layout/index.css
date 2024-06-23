@@ -1,0 +1,69 @@
+.settingWrapper .settingheader {
+  text-align: center;
+  padding: 20px;
+  color: rgba(2, 2, 29, 1);
+  font-size: 20px;
+}
+
+.settingWrapper .settingmain {
+  display: flex;
+  background-color: rgba(247, 251, 255, 1);
+}
+
+.settingWrapper .settingmain .settingsidebar {
+  width: 20%;
+  height: 80vh;
+  padding-top: 80px;
+  background-color: aliceblue;
+  /* background-image: url("../../../../assets/demofigmabg.png"); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; */
+}
+
+.settingWrapper .settingmain .settingsidebar ul li {
+  padding: 10px;
+  transition: all 0.3s linear;
+}
+
+.settingWrapper .settingmain .settingsidebar ul li:hover {
+  color: rgb(145, 170, 170) !important;
+}
+
+.settingWrapper .settingmain .settingsidebar ul li a {
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: 1px;
+  margin-left: 9px;
+  display: inline-block !important;
+}
+
+.settingWrapper .settingmain .innerchildrendata {
+  width: 80%;
+}
+
+.settingWrapper .settingmain .innerchildrendata .heading {
+  background-color: rgba(254, 228, 255, 1);
+  padding: 18px;
+  border-radius: 6px;
+  color: rgba(38, 50, 56, 1);
+  font-weight: 700;
+  font-size: 24px;
+  text-align: center;
+}
+
+.settingWrapper .settingfooter {
+  background-color: rgba(85, 85, 85, 1);
+  padding: 20px;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 1);
+  text-align: center;
+}
+
+.sidebar_active_menu {
+  color: rgba(179, 167, 58, 1) !important;
+  font-weight: 900 !important;
+  letter-spacing: 1px;
+}

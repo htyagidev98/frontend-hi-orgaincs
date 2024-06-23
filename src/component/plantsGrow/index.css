@@ -1,0 +1,16 @@
+.plantsgrow_wrapper {
+  background-color: #0f4c36;
+  margin: 70px 0px;
+  padding: 20px 70px 20px 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.plantsgrow_wrapper .heading {
+  font-weight: 500;
+  font-size: 17px;
+  letter-spacing: 0.6px;
+  color: #e4b3d6;
+  margin-left: 9px;
+}

@@ -1,0 +1,49 @@
+.whychoose_wrapper .inner {
+  background-color: #f5e9d3;
+  padding: 40px 0;
+  margin-bottom: 40px;
+  margin-top: 70px;
+  position: relative;
+}
+
+.whychoose_wrapper .inner .heading {
+  font-weight: 700;
+  font-size: 47px;
+  text-align: center;
+  color: #502e17;
+  display: block;
+}
+
+.whychoose_wrapper .inner .para {
+  color: #502e17;
+  font-weight: 400;
+  font-size: 21px;
+  text-align: center;
+}
+
+.whychoose_wrapper button {
+  background-color: #b3a73a;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 18px;
+  color: #ffffff;
+  border: none;
+  width: 169px;
+  height: 40px;
+}
+
+.whychoose_wrapper .inner .leafImageleft {
+  position: absolute;
+  top: 22px;
+  left: 30px;
+  height: 100px;
+  width: 115px;
+}
+
+.whychoose_wrapper .inner .leafImageright {
+  position: absolute;
+  bottom: 22px;
+  right: 30px;
+  height: 100px;
+  width: 115px;
+}

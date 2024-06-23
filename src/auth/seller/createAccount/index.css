@@ -1,0 +1,15 @@
+.sellerCreateAccountWrapper .form_wrapper button {
+  background-color: rgba(179, 167, 58, 1);
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  color: white;
+  padding: 7px 30px;
+}
+
+.sellerCreateAccountWrapper .formheading {
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: 1px;
+  color: rgba(85, 85, 85, 1);
+}

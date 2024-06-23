@@ -1,0 +1,9 @@
+.changePasswordWrapper .form_wrapper button {
+  background-color: rgba(179, 167, 58, 1);
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  color: white;
+  padding: 6px 30px;
+  margin-top: 32px;
+}

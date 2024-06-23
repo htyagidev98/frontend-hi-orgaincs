@@ -336,6 +336,325 @@ const NewArrivalProducts = () => {
             -26%
           </span>
         </div>
+
+        <div className="inner">
+          <img src={premiumkit} alt="arrivalImage" />
+          <h6>Premium Gardening Kit</h6>
+          <div className="star_rating mt-4">
+            <FaStar style={{ color: "#FFD02A" }} />
+            <FaStar style={{ color: "#FFD02A", marginLeft: "3px" }} />
+            <FaStar style={{ color: "#FFD02A", marginLeft: "3px" }} />
+            <FaStar style={{ color: "#FFD02A", marginLeft: "3px" }} />
+            <FaStar style={{ color: "#FFD02A", marginLeft: "3px" }} />
+          </div>
+          <div className="priceinfo mt-2 d-flex align-items-center">
+            <del
+              style={{
+                color: "#969696",
+                fontWeight: "300",
+                fontSize: "14px",
+                letterSpacing: "1px",
+              }}
+            >
+              {" "}
+              <PiCurrencyInrLight />
+              1999
+            </del>
+            <div
+              className="ms-3"
+              style={{
+                color: "#149253",
+                fontWeight: "400",
+                fontSize: "18px",
+                letterSpacing: "1px",
+              }}
+            >
+              <span>From</span>
+              <span>
+                {" "}
+                <PiCurrencyInrLight />
+                1499
+              </span>
+            </div>
+          </div>
+
+          <div className="text-center mt-4">
+            <button
+              style={{
+                width: "100%",
+                height: "50px",
+                borderRadius: "10px",
+                color: "#ffffff",
+                border: "1px solid #B3A73A",
+                backgroundColor: "#B3A73A",
+                textTransform: "uppercase",
+                fontWeight: "400",
+                fontSize: "15px",
+                letterSpacing: "1.5px",
+              }}
+            >
+              View product{" "}
+            </button>
+          </div>
+          <span
+            style={{
+              position: "absolute",
+              top: "10px",
+              left: "10px",
+              backgroundColor: "#FED02F",
+              borderRadius: "2px",
+              width: "52px",
+              height: "26px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              fontWeight: "500",
+              fontSize: "12px",
+              letterSpacing: "0.6px",
+            }}
+          >
+            -26%
+          </span>
+        </div>
+
+        <div className="inner">
+          <img src={premiumkit} alt="arrivalImage" />
+          <h6>Premium Gardening Kit</h6>
+          <div className="star_rating mt-4">
+            <FaStar style={{ color: "#FFD02A" }} />
+            <FaStar style={{ color: "#FFD02A", marginLeft: "3px" }} />
+            <FaStar style={{ color: "#FFD02A", marginLeft: "3px" }} />
+            <FaStar style={{ color: "#FFD02A", marginLeft: "3px" }} />
+            <FaStar style={{ color: "#FFD02A", marginLeft: "3px" }} />
+          </div>
+          <div className="priceinfo mt-2 d-flex align-items-center">
+            <del
+              style={{
+                color: "#969696",
+                fontWeight: "300",
+                fontSize: "14px",
+                letterSpacing: "1px",
+              }}
+            >
+              {" "}
+              <PiCurrencyInrLight />
+              1999
+            </del>
+            <div
+              className="ms-3"
+              style={{
+                color: "#149253",
+                fontWeight: "400",
+                fontSize: "18px",
+                letterSpacing: "1px",
+              }}
+            >
+              <span>From</span>
+              <span>
+                {" "}
+                <PiCurrencyInrLight />
+                1499
+              </span>
+            </div>
+          </div>
+
+          <div className="text-center mt-4">
+            <button
+              style={{
+                width: "100%",
+                height: "50px",
+                borderRadius: "10px",
+                color: "#ffffff",
+                border: "1px solid #B3A73A",
+                backgroundColor: "#B3A73A",
+                textTransform: "uppercase",
+                fontWeight: "400",
+                fontSize: "15px",
+                letterSpacing: "1.5px",
+              }}
+            >
+              View product{" "}
+            </button>
+          </div>
+          <span
+            style={{
+              position: "absolute",
+              top: "10px",
+              left: "10px",
+              backgroundColor: "#FED02F",
+              borderRadius: "2px",
+              width: "52px",
+              height: "26px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              fontWeight: "500",
+              fontSize: "12px",
+              letterSpacing: "0.6px",
+            }}
+          >
+            -26%
+          </span>
+        </div>
+        <div className="inner">
+          <img src={premiumkit} alt="arrivalImage" />
+          <h6>Premium Gardening Kit</h6>
+          <div className="star_rating mt-4">
+            <FaStar style={{ color: "#FFD02A" }} />
+            <FaStar style={{ color: "#FFD02A", marginLeft: "3px" }} />
+            <FaStar style={{ color: "#FFD02A", marginLeft: "3px" }} />
+            <FaStar style={{ color: "#FFD02A", marginLeft: "3px" }} />
+            <FaStar style={{ color: "#FFD02A", marginLeft: "3px" }} />
+          </div>
+          <div className="priceinfo mt-2 d-flex align-items-center">
+            <del
+              style={{
+                color: "#969696",
+                fontWeight: "300",
+                fontSize: "14px",
+                letterSpacing: "1px",
+              }}
+            >
+              {" "}
+              <PiCurrencyInrLight />
+              1999
+            </del>
+            <div
+              className="ms-3"
+              style={{
+                color: "#149253",
+                fontWeight: "400",
+                fontSize: "18px",
+                letterSpacing: "1px",
+              }}
+            >
+              <span>From</span>
+              <span>
+                {" "}
+                <PiCurrencyInrLight />
+                1499
+              </span>
+            </div>
+          </div>
+
+          <div className="text-center mt-4">
+            <button
+              style={{
+                width: "100%",
+                height: "50px",
+                borderRadius: "10px",
+                color: "#ffffff",
+                border: "1px solid #B3A73A",
+                backgroundColor: "#B3A73A",
+                textTransform: "uppercase",
+                fontWeight: "400",
+                fontSize: "15px",
+                letterSpacing: "1.5px",
+              }}
+            >
+              View product{" "}
+            </button>
+          </div>
+          <span
+            style={{
+              position: "absolute",
+              top: "10px",
+              left: "10px",
+              backgroundColor: "#FED02F",
+              borderRadius: "2px",
+              width: "52px",
+              height: "26px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              fontWeight: "500",
+              fontSize: "12px",
+              letterSpacing: "0.6px",
+            }}
+          >
+            -26%
+          </span>
+        </div>
+
+        <div className="inner">
+          <img src={premiumkit} alt="arrivalImage" />
+          <h6>Premium Gardening Kit</h6>
+          <div className="star_rating mt-4">
+            <FaStar style={{ color: "#FFD02A" }} />
+            <FaStar style={{ color: "#FFD02A", marginLeft: "3px" }} />
+            <FaStar style={{ color: "#FFD02A", marginLeft: "3px" }} />
+            <FaStar style={{ color: "#FFD02A", marginLeft: "3px" }} />
+            <FaStar style={{ color: "#FFD02A", marginLeft: "3px" }} />
+          </div>
+          <div className="priceinfo mt-2 d-flex align-items-center">
+            <del
+              style={{
+                color: "#969696",
+                fontWeight: "300",
+                fontSize: "14px",
+                letterSpacing: "1px",
+              }}
+            >
+              {" "}
+              <PiCurrencyInrLight />
+              1999
+            </del>
+            <div
+              className="ms-3"
+              style={{
+                color: "#149253",
+                fontWeight: "400",
+                fontSize: "18px",
+                letterSpacing: "1px",
+              }}
+            >
+              <span>From</span>
+              <span>
+                {" "}
+                <PiCurrencyInrLight />
+                1499
+              </span>
+            </div>
+          </div>
+
+          <div className="text-center mt-4">
+            <button
+              style={{
+                width: "100%",
+                height: "50px",
+                borderRadius: "10px",
+                color: "#ffffff",
+                border: "1px solid #B3A73A",
+                backgroundColor: "#B3A73A",
+                textTransform: "uppercase",
+                fontWeight: "400",
+                fontSize: "15px",
+                letterSpacing: "1.5px",
+              }}
+            >
+              View product{" "}
+            </button>
+          </div>
+          <span
+            style={{
+              position: "absolute",
+              top: "10px",
+              left: "10px",
+              backgroundColor: "#FED02F",
+              borderRadius: "2px",
+              width: "52px",
+              height: "26px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              fontWeight: "500",
+              fontSize: "12px",
+              letterSpacing: "0.6px",
+            }}
+          >
+            -26%
+          </span>
+        </div>
       </div>
     </div>
   );

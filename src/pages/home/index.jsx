@@ -7,6 +7,10 @@ import CategorySection from "../../component/categorySection";
 import EdibleProductSection from "../../component/edibleProductSection";
 import PlantAndDecorSection from "../../component/plantsAndDecorSection";
 import NewArrivalProducts from "../../component/newArrivalProducts";
+import WhyChooseUs from "../../component/WhyChoose";
+import PlantsGrow from "../../component/plantsGrow";
+import Blog from "../../component/blog";
+import Footer from "../../common/footer";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -31,6 +35,10 @@ const Home = () => {
       <EdibleProductSection />
       <PlantAndDecorSection />
       <NewArrivalProducts />
+      <WhyChooseUs />
+      <PlantsGrow />
+      <Blog />
+      <Footer />
     </div>
   );
 };

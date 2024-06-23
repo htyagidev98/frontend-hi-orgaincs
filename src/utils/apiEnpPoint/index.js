@@ -8,6 +8,7 @@ const ApiEndPoint = {
   PasswordSet: "/user/passwordSet",
   LoginWithOtp: "/user/otpLogin",
   VarifyOtpLogin: "/user/loginOtpverify",
+  CreateSellerAccount: "/seller/account",
 };
 
 export default ApiEndPoint;
