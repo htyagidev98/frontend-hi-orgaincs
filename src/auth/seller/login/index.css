@@ -1,5 +1,7 @@
 .sellerloginWrapper .form_wrapper button {
-  background-color: rgba(179, 167, 58, 1);
+  /* background-color: rgba(179, 167, 58, 1); */
+  background-color: rgba(57, 45, 195, 1);
+
   border: none;
   outline: none;
   border-radius: 5px;

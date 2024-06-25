@@ -24,6 +24,7 @@ import SettingLayout from "./auth/user/setting/layout";
 import UserDetails from "./auth/user/setting/userDetails";
 import ChangePassword from "./auth/user/setting/changePassword";
 import SaveAddress from "./auth/user/setting/saveAddress";
+import AddressDetails from "./auth/seller/addressDetails";
 
 const App = () => {
   return (
@@ -113,6 +114,15 @@ const App = () => {
           element={
             <SellerAuthLayout>
               <ShopDetails />
+            </SellerAuthLayout>
+          }
+        />
+
+        <Route
+          path="/seller/addressdetails"
+          element={
+            <SellerAuthLayout>
+              <AddressDetails />
             </SellerAuthLayout>
           }
         />

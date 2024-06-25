@@ -1,7 +1,6 @@
-.sellerVarifySignupotpWrapper .form_wrapper button {
+.sellerAddressDetailWrapper .form_wrapper button {
   /* background-color: rgba(179, 167, 58, 1); */
   background-color: rgba(57, 45, 195, 1);
-
   border: none;
   outline: none;
   border-radius: 5px;
@@ -9,7 +8,7 @@
   padding: 7px 30px;
 }
 
-.sellerVarifySignupotpWrapper .formheading {
+.sellerAddressDetailWrapper .formheading {
   font-weight: 400;
   font-size: 18px;
   letter-spacing: 1px;

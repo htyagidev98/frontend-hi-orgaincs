@@ -9,6 +9,7 @@ const ApiEndPoint = {
   LoginWithOtp: "/user/otpLogin",
   VarifyOtpLogin: "/user/loginOtpverify",
   CreateSellerAccount: "/seller/account",
+  SellerShopDetails: "/seller/createDetails",
 };
 
 export default ApiEndPoint;

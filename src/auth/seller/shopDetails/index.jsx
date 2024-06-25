@@ -1,25 +1,28 @@
 import React, { useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import "./index.css";
+import ButtonLoader from "../../../component/buttonLoader";
+import { useLocation, useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../../utils/helper";
+import ApiEndPoint from "../../../utils/apiEnpPoint";
+import { toast } from "react-toastify";
+import axios from "axios";
 const ShopDetails = () => {
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const { state } = useLocation();
   const [formData, setFormData] = useState({
     inputData: {
       full_name: "",
       shop_business_name: "",
-      address: "",
-      state_or_district: "",
-      city_village_town: "",
-      pincode: "",
-      additional_contact_info: "",
+      new_password: "",
+      confirm_password: "",
     },
     inputError: {
       full_name: "",
       shop_business_name: "",
-      address: "",
-      state_or_district: "",
-      city_village_town: "",
-      pincode: "",
-      additional_contact_info: "",
+      new_password: "",
+      confirm_password: "",
     },
   });
   const handleChange = (e) => {
@@ -73,13 +76,13 @@ const ShopDetails = () => {
       }
     }
 
-    if (name === "address") {
+    if (name === "new_password") {
       if (value.length > 0) {
         setFormData((prev) => ({
           ...prev,
           inputError: {
             ...prev.inputError,
-            address: "",
+            new_password: "",
           },
         }));
       } else {
@@ -87,19 +90,19 @@ const ShopDetails = () => {
           ...prev,
           inputError: {
             ...prev.inputError,
-            address: "Address is required",
+            new_password: "New password is required",
           },
         }));
       }
     }
 
-    if (name === "state_or_district") {
+    if (name === "confirm_password") {
       if (value.length > 0) {
         setFormData((prev) => ({
           ...prev,
           inputError: {
             ...prev.inputError,
-            state_or_district: "",
+            confirm_password: "",
           },
         }));
       } else {
@@ -107,118 +110,27 @@ const ShopDetails = () => {
           ...prev,
           inputError: {
             ...prev.inputError,
-            state_or_district: "State or district is required",
-          },
-        }));
-      }
-    }
-
-    if (name === "city_village_town") {
-      if (value.length > 0) {
-        setFormData((prev) => ({
-          ...prev,
-          inputError: {
-            ...prev.inputError,
-            city_village_town: "",
-          },
-        }));
-      } else {
-        setFormData((prev) => ({
-          ...prev,
-          inputError: {
-            ...prev.inputError,
-            city_village_town: "City or village or town is required",
-          },
-        }));
-      }
-    }
-
-    if (name === "pincode") {
-      if (value.length > 0) {
-        setFormData((prev) => ({
-          ...prev,
-          inputError: {
-            ...prev.inputError,
-            pincode: "",
-          },
-        }));
-      } else {
-        setFormData((prev) => ({
-          ...prev,
-          inputError: {
-            ...prev.inputError,
-            pincode: "Pin code is required",
-          },
-        }));
-      }
-    }
-
-    if (name === "additional_contact_info") {
-      if (value.length > 0) {
-        setFormData((prev) => ({
-          ...prev,
-          inputError: {
-            ...prev.inputError,
-            additional_contact_info: "",
-          },
-        }));
-      } else {
-        setFormData((prev) => ({
-          ...prev,
-          inputError: {
-            ...prev.inputError,
-            additional_contact_info:
-              "Additional contact information is required",
+            confirm_password: "Confirm password is required",
           },
         }));
       }
     }
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (
-      !formData.inputData.additional_contact_info &&
-      !formData.inputData.address &&
-      !formData.inputData.city_village_town &&
       !formData.inputData.full_name &&
-      !formData.inputData.pincode &&
       !formData.inputData.shop_business_name &&
-      !formData.inputData.state_or_district
+      !formData.inputData.new_password &&
+      !formData.inputData.confirm_password
     ) {
       setFormData((prev) => ({
         ...prev,
         inputError: {
           full_name: "Full name is required",
           shop_business_name: "Shop or business name is required",
-          address: "Address is required",
-          state_or_district: "State or district is required",
-          city_village_town: "City or village or town is required",
-          pincode: "Pin code is required",
-          additional_contact_info: "Additional contact information is required",
-        },
-      }));
-    } else if (!formData.inputData.additional_contact_info) {
-      setFormData((prev) => ({
-        ...prev,
-        inputError: {
-          ...prev.inputError,
-          additional_contact_info: "Additional contact information is required",
-        },
-      }));
-    } else if (!formData.inputData.address) {
-      setFormData((prev) => ({
-        ...prev,
-        inputError: {
-          ...prev.inputError,
-          address: "Address is required",
-        },
-      }));
-    } else if (!formData.inputData.city_village_town) {
-      setFormData((prev) => ({
-        ...prev,
-        inputError: {
-          ...prev.inputError,
-          city_village_town: "City or village or town is required",
+          new_password: "New password is required",
+          confirm_password: "Confirm password is required",
         },
       }));
     } else if (!formData.inputData.full_name) {
@@ -229,14 +141,6 @@ const ShopDetails = () => {
           full_name: "Full name is required",
         },
       }));
-    } else if (!formData.inputData.pincode) {
-      setFormData((prev) => ({
-        ...prev,
-        inputError: {
-          ...prev.inputError,
-          pincode: "Pin code is required",
-        },
-      }));
     } else if (!formData.inputData.shop_business_name) {
       setFormData((prev) => ({
         ...prev,
@@ -245,25 +149,60 @@ const ShopDetails = () => {
           shop_business_name: "Shop or business name is required",
         },
       }));
-    } else if (!formData.inputData.state_or_district) {
+    } else if (!formData.inputData.new_password) {
       setFormData((prev) => ({
         ...prev,
         inputError: {
           ...prev.inputError,
-          shop_business_name: "State or district is required",
+          new_password: "New password is required",
+        },
+      }));
+    } else if (!formData.inputData.confirm_password) {
+      setFormData((prev) => ({
+        ...prev,
+        inputError: {
+          ...prev.inputError,
+          confirm_password: "Confirm password is required",
+        },
+      }));
+    } else if (
+      formData.inputData.new_password !== formData.inputData.confirm_password
+    ) {
+      setFormData((prev) => ({
+        ...prev,
+        inputError: {
+          ...prev.inputError,
+          confirm_password: "Password must match",
         },
       }));
     } else {
+      const payload = {
+        user_id: state?.main,
+        password: formData?.inputData?.new_password,
+        name: formData.inputData.full_name,
+        businessName: formData?.inputData?.shop_business_name,
+      };
       if (
-        formData.inputData.additional_contact_info &&
-        formData.inputData.address &&
-        formData.inputData.city_village_town &&
         formData.inputData.full_name &&
-        formData.inputData.pincode &&
         formData.inputData.shop_business_name &&
-        formData.inputData.state_or_district
+        formData.inputData.new_password &&
+        formData.inputData.confirm_password
       ) {
-        console.log(formData.inputData);
+        try {
+          setLoading(true);
+          const res = await axios.put(
+            `${BASE_URL}${ApiEndPoint.SellerShopDetails}`,
+            payload
+          );
+          setLoading(false);
+          if (res.status === 200) {
+            toast.success(res?.data?.message);
+            navigate("/seller/addressdetails");
+          }
+        } catch (error) {
+          toast.error(error?.response?.data?.message);
+          setLoading(false);
+        }
       }
     }
   };
@@ -311,34 +250,19 @@ const ShopDetails = () => {
 
           <Row className="mb-3">
             <Col>
-              <Form.Label>Address</Form.Label>
-              <Form.Group className="mb-3" controlId="formBasicAddress">
+              <Form.Label>New Password</Form.Label>
+              <Form.Group className="mb-3" controlId="formBasicNewPassword">
                 <Form.Control
                   type="text"
-                  name="address"
+                  name="new_password"
                   onChange={handleChange}
-                  placeholder="Enter address"
-                  value={formData.inputData.address}
+                  placeholder="Enter new password"
+                  value={formData.inputData.new_password}
                 />
               </Form.Group>
-              {formData.inputError.address && (
-                <p className="text-danger">{formData.inputError.address} </p>
-              )}
-            </Col>
-            <Col>
-              <Form.Label>State / District</Form.Label>
-              <Form.Group className="mb-3" controlId="formBasicStateOrDistrict">
-                <Form.Control
-                  type="text"
-                  name="state_or_district"
-                  onChange={handleChange}
-                  placeholder="Enter State / District"
-                  value={formData.inputData.state_or_district}
-                />
-              </Form.Group>
-              {formData.inputError.state_or_district && (
+              {formData.inputError.new_password && (
                 <p className="text-danger">
-                  {formData.inputError.state_or_district}{" "}
+                  {formData.inputError.new_password}{" "}
                 </p>
               )}
             </Col>
@@ -346,60 +270,25 @@ const ShopDetails = () => {
 
           <Row className="mb-3">
             <Col>
-              <Form.Label>City / Village / Town</Form.Label>
-              <Form.Group className="mb-3" controlId="formBasicCityVillageTown">
+              <Form.Label>Confirm Password</Form.Label>
+              <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
                 <Form.Control
                   type="text"
-                  name="city_village_town"
+                  name="confirm_password"
                   onChange={handleChange}
-                  placeholder="Enter City / Village / Town"
-                  value={formData.inputData.city_village_town}
+                  placeholder="Enter confirm password"
+                  value={formData.inputData.confirm_password}
                 />
               </Form.Group>
-              {formData.inputError.city_village_town && (
+              {formData.inputError.confirm_password && (
                 <p className="text-danger">
-                  {formData.inputError.city_village_town}{" "}
-                </p>
-              )}
-            </Col>
-            <Col>
-              <Form.Label>Pincode</Form.Label>
-              <Form.Group className="mb-3" controlId="formBasicPincode">
-                <Form.Control
-                  type="text"
-                  name="pincode"
-                  onChange={handleChange}
-                  placeholder="Enter pin code"
-                  value={formData.inputData.pincode}
-                />
-              </Form.Group>
-              {formData.inputError.pincode && (
-                <p className="text-danger">{formData.inputError.pincode} </p>
-              )}
-            </Col>
-          </Row>
-
-          <Row>
-            <Col>
-              <Form.Label>Additional Contact Information</Form.Label>
-              <Form.Group className="mb-3" controlId="formBasicAddContachInfo">
-                <Form.Control
-                  type="text"
-                  name="additional_contact_info"
-                  onChange={handleChange}
-                  placeholder="Enter Additional Contact Information"
-                  value={formData.inputData.additional_contact_info}
-                />
-              </Form.Group>
-              {formData.inputError.additional_contact_info && (
-                <p className="text-danger">
-                  {formData.inputError.additional_contact_info}{" "}
+                  {formData.inputError.confirm_password}{" "}
                 </p>
               )}
             </Col>
           </Row>
 
-          <button type="submit">Submit</button>
+          <button type="submit">{loading ? <ButtonLoader /> : "Submit"}</button>
         </Form>
       </div>
     </div>

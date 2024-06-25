@@ -76,12 +76,16 @@ const VerifySignupOtpForSeller = () => {
           setLoading(false);
           if (res.status === 200) {
             toast.success(res?.data?.message);
+            navigate("/seller/shopdetails", {
+              state: {
+                main: res.data?.data?.user_id,
+              },
+            });
           }
         } catch (error) {
           toast.error(error?.response?.data?.message);
           setLoading(false);
         }
-        // navigate("/seller/shopdetails");
       }
     }
   };
