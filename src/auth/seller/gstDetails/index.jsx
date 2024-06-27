@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import "./index.css";
+import axios from "axios";
+import { BASE_URL } from "../../../utils/helper";
+import ApiEndPoint from "../../../utils/apiEnpPoint";
+import { toast } from "react-toastify";
+import { useLocation, useNavigate } from "react-router-dom";
+import ButtonLoader from "../../../component/buttonLoader";
 export const GstDetails = () => {
   const [formData, setFormData] = useState({
     inputData: {
@@ -14,6 +20,11 @@ export const GstDetails = () => {
       Pan_Number: "",
     },
   });
+
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const { state } = useLocation();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     e.preventDefault();
@@ -85,7 +96,7 @@ export const GstDetails = () => {
       }
     }
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (
       !formData.inputData.Business_Name &&
@@ -125,12 +136,32 @@ export const GstDetails = () => {
         },
       }));
     } else {
+      const payload = {
+        user_id: state?.main,
+        pan: formData?.inputData?.Pan_Number,
+        gst: formData?.inputData?.Gst_Number,
+        name: formData?.inputData?.Business_Name,
+      };
       if (
         formData.inputData.Business_Name &&
         formData.inputData.Gst_Number &&
         formData.inputData.Pan_Number
       ) {
-        console.log(formData.inputData);
+        try {
+          setLoading(true);
+          const res = await axios.post(
+            `${BASE_URL}${ApiEndPoint.SellerGstDetails}`,
+            payload
+          );
+          setLoading(false);
+          if (res.status === 200) {
+            toast.success(res?.data?.message);
+            navigate("/seller/login");
+          }
+        } catch (error) {
+          toast.error(error?.response?.data?.message);
+          setLoading(false);
+        }
       }
     }
   };
@@ -194,7 +225,7 @@ export const GstDetails = () => {
               )}
             </Col>
           </Row>
-          <button type="submit">Submit</button>
+          <button type="submit">{loading ? <ButtonLoader /> : "Submit"}</button>
         </Form>
       </div>
     </div>

@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import "./index.css";
+import { BASE_URL } from "../../../utils/helper";
+import ApiEndPoint from "../../../utils/apiEnpPoint";
+import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
+import ButtonLoader from "../../../component/buttonLoader";
+import { toast } from "react-toastify";
 export const BankDetails = () => {
   const [formData, setFormData] = useState({
     inputData: {
@@ -8,6 +14,7 @@ export const BankDetails = () => {
       confirm_account_number: "",
       IFSC_code: "",
       Branch_Name: "",
+      Bank_Name: "",
       Account_holder_name: "",
     },
     inputError: {
@@ -15,9 +22,14 @@ export const BankDetails = () => {
       confirm_account_number: "",
       IFSC_code: "",
       Branch_Name: "",
+      Bank_Name: "",
       Account_holder_name: "",
     },
   });
+
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const { state } = useLocation();
   const handleChange = (e) => {
     const { name, value } = e.target;
     e.preventDefault();
@@ -109,6 +121,26 @@ export const BankDetails = () => {
       }
     }
 
+    if (name === "Bank_Name") {
+      if (value.length > 0) {
+        setFormData((prev) => ({
+          ...prev,
+          inputError: {
+            ...prev.inputError,
+            Bank_Name: "",
+          },
+        }));
+      } else {
+        setFormData((prev) => ({
+          ...prev,
+          inputError: {
+            ...prev.inputError,
+            Bank_Name: "Bank name is required",
+          },
+        }));
+      }
+    }
+
     if (name === "Account_holder_name") {
       if (value.length > 0) {
         setFormData((prev) => ({
@@ -129,12 +161,13 @@ export const BankDetails = () => {
       }
     }
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (
       !formData.inputData.account_number &&
       !formData.inputData.confirm_account_number &&
       !formData.inputData.Branch_Name &&
+      !formData.inputData.Bank_Name &&
       !formData.inputData.IFSC_code &&
       !formData.inputData.Account_holder_name
     ) {
@@ -144,6 +177,7 @@ export const BankDetails = () => {
           account_number: "Account number is required",
           confirm_account_number: "Confirm account number is required",
           Branch_Name: "Branch name is required",
+          Bank_Name: "Bank name is required",
           IFSC_code: "Ifsc code is required",
           Account_holder_name: "Account Holder name is required",
         },
@@ -183,6 +217,14 @@ export const BankDetails = () => {
           Branch_Name: "Branch name is required",
         },
       }));
+    } else if (!formData.inputData.Bank_Name) {
+      setFormData((prev) => ({
+        ...prev,
+        inputError: {
+          ...prev.inputError,
+          Bank_Name: "Bank name is required",
+        },
+      }));
     } else if (!formData.inputData.Account_holder_name) {
       setFormData((prev) => ({
         ...prev,
@@ -200,14 +242,41 @@ export const BankDetails = () => {
         },
       }));
     } else {
+      const payload = {
+        user_id: state?.main,
+        ifsc: formData?.inputData?.IFSC_code,
+        accountNumber: formData?.inputData?.account_number,
+        branch: formData?.inputData?.Branch_Name,
+        name: formData?.inputData?.Account_holder_name,
+        bankName: formData?.inputData?.Bank_Name,
+      };
       if (
         formData.inputData.Account_holder_name &&
         formData.inputData.Branch_Name &&
+        formData.inputData?.Bank_Name &&
         formData.inputData.IFSC_code &&
         formData.inputData.account_number &&
         formData.inputData.confirm_account_number
       ) {
-        console.log(formData.inputData);
+        try {
+          setLoading(true);
+          const res = await axios.post(
+            `${BASE_URL}${ApiEndPoint.SellerBankDetails}`,
+            payload
+          );
+          setLoading(false);
+          if (res.status === 200) {
+            toast.success(res?.data?.message);
+            navigate("/seller/gstdetails", {
+              state: {
+                main: res.data?.data?.user_id,
+              },
+            });
+          }
+        } catch (error) {
+          toast.error(error?.response?.data?.message);
+          setLoading(false);
+        }
       }
     }
   };
@@ -299,6 +368,24 @@ export const BankDetails = () => {
 
           <Row>
             <Col>
+              <Form.Label>Bank Name</Form.Label>
+              <Form.Group className="mb-3" controlId="formBasicBankName">
+                <Form.Control
+                  type="text"
+                  name="Bank_Name"
+                  onChange={handleChange}
+                  placeholder="Enter Bank Name"
+                  value={formData.inputData.Bank_Name}
+                />
+              </Form.Group>
+              {formData.inputError.Bank_Name && (
+                <p className="text-danger">{formData.inputError.Bank_Name} </p>
+              )}
+            </Col>
+          </Row>
+
+          <Row>
+            <Col>
               <Form.Label>Account Holder Name</Form.Label>
               <Form.Group
                 className="mb-3"
@@ -320,7 +407,7 @@ export const BankDetails = () => {
             </Col>
           </Row>
 
-          <button type="submit">Submit</button>
+          <button type="submit">{loading ? <ButtonLoader /> : "Submit"}</button>
         </Form>
       </div>
     </div>

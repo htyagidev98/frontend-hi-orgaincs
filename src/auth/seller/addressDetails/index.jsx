@@ -1,6 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
 import "./index.css";
+import { useLocation, useNavigate } from "react-router-dom";
+import ButtonLoader from "../../../component/buttonLoader";
+import { BASE_URL, onChangeToNumber } from "../../../utils/helper";
+import ApiEndPoint from "../../../utils/apiEnpPoint";
+import { toast } from "react-toastify";
+import axios from "axios";
 const AddressDetails = () => {
   const [formData, setFormData] = useState({
     inputData: {
@@ -26,6 +32,10 @@ const AddressDetails = () => {
       landmark: "",
     },
   });
+
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const { state } = useLocation();
   const handleChange = (e) => {
     const { name, value } = e.target;
     e.preventDefault();
@@ -33,7 +43,10 @@ const AddressDetails = () => {
       ...prev,
       inputData: {
         ...prev.inputData,
-        [name]: value,
+        [name]:
+          name === "phone" || name === "alt_phone"
+            ? onChangeToNumber(value)
+            : value,
       },
     }));
 
@@ -217,7 +230,7 @@ const AddressDetails = () => {
       }
     }
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (
       !formData.inputData.full_name &&
@@ -317,6 +330,18 @@ const AddressDetails = () => {
         },
       }));
     } else {
+      const payload = {
+        user_id: "667803ec4668e9a19215ca2a",
+        contact_no: formData?.inputData.phone,
+        alternateContact_no: formData?.inputData?.alt_phone,
+        name: formData?.inputData?.full_name,
+        pincode: formData?.inputData?.pincode,
+        locality: formData.inputData.road_colony,
+        address: formData?.inputData.house_building,
+        city: formData?.inputData?.city,
+        state: formData?.inputData?.state,
+        landmark: formData?.inputData?.landmark,
+      };
       if (
         formData.inputData.full_name &&
         formData.inputData.alt_phone &&
@@ -328,10 +353,53 @@ const AddressDetails = () => {
         formData.inputData.road_colony &&
         formData.inputData.state
       ) {
-        console.log(formData.inputData);
+        try {
+          setLoading(true);
+          const res = await axios.post(
+            `${BASE_URL}${ApiEndPoint.SellerAddressDetails}`,
+            payload
+          );
+          setLoading(false);
+          if (res.status === 200) {
+            toast.success(res?.data?.message);
+            navigate("/seller/bankdetails", {
+              state: {
+                main: res.data?.data?.user_id,
+              },
+            });
+          }
+        } catch (error) {
+          toast.error(error?.response?.data?.message);
+          setLoading(false);
+        }
       }
     }
   };
+
+  useEffect(() => {
+    const getData = setTimeout(async () => {
+      try {
+        const res = await axios.get(
+          `https://api.postalpincode.in/pincode/${formData?.inputData?.pincode}`
+        );
+        if (res.data[0].Status === "404") {
+          return;
+        }
+
+        setFormData((prev) => ({
+          ...prev,
+          inputData: {
+            ...prev.inputData,
+            city: res?.data[0]?.PostOffice[0]?.District || "",
+            state: res?.data[0]?.PostOffice[0]?.State || "",
+          },
+        }));
+      } catch (error) {
+        console.log(error);
+      }
+    }, 2000);
+    return () => clearTimeout(getData);
+  }, [formData?.inputData?.pincode]);
   return (
     <div className="sellerAddressDetailWrapper">
       <span className="formheading">Pickup Address Details</span>
@@ -360,6 +428,7 @@ const AddressDetails = () => {
                   type="text"
                   name="phone"
                   onChange={handleChange}
+                  maxlength="10"
                   value={formData.inputData.phone}
                   placeholder="Enter phone"
                 />
@@ -377,6 +446,7 @@ const AddressDetails = () => {
                 <Form.Control
                   type="text"
                   name="alt_phone"
+                  maxlength="10"
                   onChange={handleChange}
                   placeholder="Enter alternate phone"
                   value={formData.inputData.alt_phone}
@@ -413,6 +483,7 @@ const AddressDetails = () => {
                   onChange={handleChange}
                   placeholder="Enter state"
                   value={formData.inputData.state}
+                  disabled
                 />
               </Form.Group>
               {formData.inputError.state && (
@@ -427,6 +498,7 @@ const AddressDetails = () => {
                   name="city"
                   onChange={handleChange}
                   placeholder="Enter city"
+                  disabled
                   value={formData.inputData.city}
                 />
               </Form.Group>
@@ -492,7 +564,7 @@ const AddressDetails = () => {
             </Col>
           </Row>
 
-          <button type="submit">Submit</button>
+          <button type="submit">{loading ? <ButtonLoader /> : "Submit"}</button>
         </Form>
       </div>
     </div>

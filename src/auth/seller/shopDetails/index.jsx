@@ -197,7 +197,11 @@ const ShopDetails = () => {
           setLoading(false);
           if (res.status === 200) {
             toast.success(res?.data?.message);
-            navigate("/seller/addressdetails");
+            navigate("/seller/addressdetails", {
+              state: {
+                main: res.data?.data?.user_id,
+              },
+            });
           }
         } catch (error) {
           toast.error(error?.response?.data?.message);
@@ -253,7 +257,7 @@ const ShopDetails = () => {
               <Form.Label>New Password</Form.Label>
               <Form.Group className="mb-3" controlId="formBasicNewPassword">
                 <Form.Control
-                  type="text"
+                  type="password"
                   name="new_password"
                   onChange={handleChange}
                   placeholder="Enter new password"
@@ -273,7 +277,7 @@ const ShopDetails = () => {
               <Form.Label>Confirm Password</Form.Label>
               <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
                 <Form.Control
-                  type="text"
+                  type="password"
                   name="confirm_password"
                   onChange={handleChange}
                   placeholder="Enter confirm password"
