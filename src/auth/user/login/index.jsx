@@ -144,7 +144,14 @@ const Login = () => {
             {formError.passwordError && (
               <p className="text-danger">{formError.passwordError} </p>
             )}
-            <div style={{ position: "absolute", right: "10px", top: "5px" }}>
+            <div
+              style={{
+                position: "absolute",
+                right: "10px",
+                top: "5px",
+                cursor: "pointer",
+              }}
+            >
               {eye ? (
                 <FaEye onClick={() => setEye(!eye)} />
               ) : (

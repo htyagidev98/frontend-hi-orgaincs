@@ -11,9 +11,7 @@ const EdibleProductSection = () => {
   return (
     <div className="edibleproduct_wrapper">
       <div className="heading_wrapper">
-        <h2>Our </h2>
-        <h2>EDIBLE OIL PRODUCTS </h2>
-        <h2 className="product_head_color">PRODUCTS </h2>
+        <h2>OUR EDIBLE OIL PRODUCTS </h2>
       </div>
       <div className="card_wrapper">
         <div className="inner">

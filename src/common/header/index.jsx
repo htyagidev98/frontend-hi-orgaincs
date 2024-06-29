@@ -13,7 +13,12 @@ import { AiOutlineSetting } from "react-icons/ai";
 const Header = () => {
   return (
     <header className="header_wrapper">
-      <div className="top_header">20% OFF on Selected Products</div>
+      <div className="top_header">
+        <span>20% OFF on Selected Products</span>
+        <NavLink className={"nav-link"} to="/seller/login">
+          Become a Seller
+        </NavLink>
+      </div>
       <div className="middle_header">
         <div className="left_data">
           <div className="logowrapper">
@@ -54,9 +59,6 @@ const Header = () => {
               Setting
             </NavLink>
           </div>
-          <NavLink className={"nav-link fw-bold ms-3"} to="/seller/login">
-            Become a Seller
-          </NavLink>
 
           <NavLink className={"nav-link fw-bold ms-3"} to="/login">
             Login

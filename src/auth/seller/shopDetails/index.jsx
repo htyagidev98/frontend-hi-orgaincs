@@ -7,6 +7,7 @@ import { BASE_URL } from "../../../utils/helper";
 import ApiEndPoint from "../../../utils/apiEnpPoint";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 const ShopDetails = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -25,6 +26,12 @@ const ShopDetails = () => {
       confirm_password: "",
     },
   });
+
+  const [eye, setEye] = useState({
+    password: false,
+    confirm_password: false,
+  });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     e.preventDefault();
@@ -85,12 +92,48 @@ const ShopDetails = () => {
             new_password: "",
           },
         }));
+
+        if (value.length < 8) {
+          setFormData((prev) => ({
+            ...prev,
+            inputError: {
+              ...prev.inputError,
+              new_password: "Password length must be minimum 8 characters",
+            },
+          }));
+        } else if (!/[0-9]/.test(value)) {
+          setFormData((prev) => ({
+            ...prev,
+            inputError: {
+              ...prev.inputError,
+              new_password: "Password must contain at least one number (0-9)",
+            },
+          }));
+        } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(value)) {
+          setFormData((prev) => ({
+            ...prev,
+            inputError: {
+              ...prev.inputError,
+              new_password:
+                "Password must contain at least one special character",
+            },
+          }));
+        } else if (!/[A-Z]/.test(value)) {
+          setFormData((prev) => ({
+            ...prev,
+            inputError: {
+              ...prev.inputError,
+              new_password:
+                "Password must contain at least one uppercase letter (A-Z)",
+            },
+          }));
+        }
       } else {
         setFormData((prev) => ({
           ...prev,
           inputError: {
             ...prev.inputError,
-            new_password: "New password is required",
+            new_password: "Password is required",
           },
         }));
       }
@@ -105,6 +148,16 @@ const ShopDetails = () => {
             confirm_password: "",
           },
         }));
+
+        if (value !== formData?.inputData?.new_password) {
+          setFormData((prev) => ({
+            ...prev,
+            inputError: {
+              ...prev.inputError,
+              confirm_password: "Password must match",
+            },
+          }));
+        }
       } else {
         setFormData((prev) => ({
           ...prev,
@@ -210,6 +263,11 @@ const ShopDetails = () => {
       }
     }
   };
+
+  const handleToggleEye = (field) => {
+    setEye({ ...eye, [field]: !eye[field] });
+  };
+
   return (
     <div className="sellerShopDetailWrapper">
       <span className="formheading">
@@ -254,41 +312,82 @@ const ShopDetails = () => {
 
           <Row className="mb-3">
             <Col>
-              <Form.Label>New Password</Form.Label>
-              <Form.Group className="mb-3" controlId="formBasicNewPassword">
-                <Form.Control
-                  type="password"
-                  name="new_password"
-                  onChange={handleChange}
-                  placeholder="Enter new password"
-                  value={formData.inputData.new_password}
-                />
-              </Form.Group>
-              {formData.inputError.new_password && (
-                <p className="text-danger">
-                  {formData.inputError.new_password}{" "}
-                </p>
-              )}
+              <div className="position-relative">
+                <Form.Label>New Password</Form.Label>
+                <Form.Group className="mb-3" controlId="formBasicNewPassword">
+                  <Form.Control
+                    type={eye.password ? "text" : "password"}
+                    name="new_password"
+                    onChange={handleChange}
+                    placeholder="Enter new password"
+                    value={formData.inputData.new_password}
+                  />
+                </Form.Group>
+                {formData.inputError.new_password && (
+                  <p className="text-danger">
+                    {formData.inputError.new_password}{" "}
+                  </p>
+                )}
+
+                <div
+                  style={{
+                    position: "absolute",
+                    right: "10px",
+                    top: "36px",
+                    cursor: "pointer",
+                  }}
+                >
+                  {eye.password ? (
+                    <FaEye onClick={() => handleToggleEye("password")} />
+                  ) : (
+                    <FaEyeSlash onClick={() => handleToggleEye("password")} />
+                  )}
+                </div>
+              </div>
             </Col>
           </Row>
 
           <Row className="mb-3">
             <Col>
-              <Form.Label>Confirm Password</Form.Label>
-              <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
-                <Form.Control
-                  type="password"
-                  name="confirm_password"
-                  onChange={handleChange}
-                  placeholder="Enter confirm password"
-                  value={formData.inputData.confirm_password}
-                />
-              </Form.Group>
-              {formData.inputError.confirm_password && (
-                <p className="text-danger">
-                  {formData.inputError.confirm_password}{" "}
-                </p>
-              )}
+              <div className="position-relative">
+                <Form.Label>Confirm Password</Form.Label>
+                <Form.Group
+                  className="mb-3"
+                  controlId="formBasicConfirmPassword"
+                >
+                  <Form.Control
+                    type={eye.confirm_password ? "text" : "password"}
+                    name="confirm_password"
+                    onChange={handleChange}
+                    placeholder="Enter confirm password"
+                    value={formData.inputData.confirm_password}
+                  />
+                </Form.Group>
+                {formData.inputError.confirm_password && (
+                  <p className="text-danger">
+                    {formData.inputError.confirm_password}{" "}
+                  </p>
+                )}
+
+                <div
+                  style={{
+                    position: "absolute",
+                    right: "10px",
+                    top: "37px",
+                    cursor: "pointer",
+                  }}
+                >
+                  {eye.confirm_password ? (
+                    <FaEye
+                      onClick={() => handleToggleEye("confirm_password")}
+                    />
+                  ) : (
+                    <FaEyeSlash
+                      onClick={() => handleToggleEye("confirm_password")}
+                    />
+                  )}
+                </div>
+              </div>
             </Col>
           </Row>
 

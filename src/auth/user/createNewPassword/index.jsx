@@ -15,10 +15,14 @@ const CreateNewPassword = () => {
     newpassword: "",
     confirmpassword: "",
   });
+
+  const [eye, setEye] = useState({
+    password: false,
+    confirm_password: false,
+  });
   const { state } = useLocation();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const [eye, setEye] = useState(false);
   const [formError, setFormError] = useState({
     newpasswordError: "",
     confirmpasswordError: "",
@@ -32,28 +36,57 @@ const CreateNewPassword = () => {
     });
     if (name === "newpassword") {
       if (value.length > 0) {
-        setFormError({
-          ...formError,
+        setFormError((prev) => ({
+          ...prev,
           newpasswordError: "",
-        });
+        }));
+        if (value.length < 8) {
+          setFormError((prev) => ({
+            ...prev,
+            newpasswordError: "Password length must be minimum 8 characters",
+          }));
+        } else if (!/[0-9]/.test(value)) {
+          setFormError((prev) => ({
+            ...prev,
+            newpasswordError: "Password must contain at least one number (0-9)",
+          }));
+        } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(value)) {
+          setFormError((prev) => ({
+            ...prev,
+            newpasswordError:
+              "Password must contain at least one special character",
+          }));
+        } else if (!/[A-Z]/.test(value)) {
+          setFormError((prev) => ({
+            ...prev,
+            newpasswordError:
+              "Password must contain at least one uppercase letter (A-Z)",
+          }));
+        }
       } else {
-        setFormError({
-          ...formError,
-          newpasswordError: "New Password is required",
-        });
+        setFormError((prev) => ({
+          ...prev,
+          passwordError: "Password is required",
+        }));
       }
     }
     if (name === "confirmpassword") {
       if (value.length > 0) {
-        setFormError({
-          ...formError,
+        setFormError((prev) => ({
+          ...prev,
           confirmpasswordError: "",
-        });
+        }));
+        if (value !== formData.newpassword) {
+          setFormError((prev) => ({
+            ...prev,
+            confirmpasswordError: "Password must match",
+          }));
+        }
       } else {
-        setFormError({
-          ...formError,
-          confirmpasswordError: "Confirm Password is required",
-        });
+        setFormError((prev) => ({
+          ...prev,
+          confirmpasswordError: "Confirm password is required",
+        }));
       }
     }
   };
@@ -106,6 +139,11 @@ const CreateNewPassword = () => {
       }
     }
   };
+
+  const handleToggleEye = (field) => {
+    setEye({ ...eye, [field]: !eye[field] });
+  };
+
   return (
     <div className="createnewpass_wrapper">
       <img src={createnewpassword} height={197} width={380} className="mb-5" />
@@ -127,7 +165,7 @@ const CreateNewPassword = () => {
           <div className="position-relative">
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Control
-                type={eye ? "text" : "password"}
+                type={eye.password ? "text" : "password"}
                 placeholder="New Password"
                 name="newpassword"
                 value={formData.newpassword}
@@ -139,13 +177,17 @@ const CreateNewPassword = () => {
               <p className="text-danger">{formError.newpasswordError} </p>
             )}
             <div
-              style={{ position: "absolute", right: "10px", top: "5px" }}
-              className="d-none"
+              style={{
+                position: "absolute",
+                right: "10px",
+                top: "5px",
+                cursor: "pointer",
+              }}
             >
-              {eye ? (
-                <FaEye onClick={() => setEye(!eye)} />
+              {eye.password ? (
+                <FaEye onClick={() => handleToggleEye("password")} />
               ) : (
-                <FaEyeSlash onClick={() => setEye(!eye)} />
+                <FaEyeSlash onClick={() => handleToggleEye("password")} />
               )}
             </div>
           </div>
@@ -153,7 +195,7 @@ const CreateNewPassword = () => {
           <div className="position-relative">
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Control
-                type={eye ? "text" : "password"}
+                type={eye.confirm_password ? "text" : "password"}
                 placeholder="Enter Again"
                 name="confirmpassword"
                 value={formData.confirmpassword}
@@ -167,13 +209,19 @@ const CreateNewPassword = () => {
               <p className="text-danger">{formError.confirmpasswordError} </p>
             )}
             <div
-              style={{ position: "absolute", right: "10px", top: "5px" }}
-              className="d-none"
+              style={{
+                position: "absolute",
+                right: "10px",
+                top: "5px",
+                cursor: "pointer",
+              }}
             >
-              {eye ? (
-                <FaEye onClick={() => setEye(!eye)} />
+              {eye.confirm_password ? (
+                <FaEye onClick={() => handleToggleEye("confirm_password")} />
               ) : (
-                <FaEyeSlash onClick={() => setEye(!eye)} />
+                <FaEyeSlash
+                  onClick={() => handleToggleEye("confirm_password")}
+                />
               )}
             </div>
           </div>

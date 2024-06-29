@@ -67,15 +67,38 @@ const Signup = () => {
     }
     if (name === "password") {
       if (value.length > 0) {
-        setFormError({
-          ...formError,
+        setFormError((prev) => ({
+          ...prev,
           passwordError: "",
-        });
+        }));
+        if (value.length < 8) {
+          setFormError((prev) => ({
+            ...prev,
+            passwordError: "Password length must be minimum 8 characters",
+          }));
+        } else if (!/[0-9]/.test(value)) {
+          setFormError((prev) => ({
+            ...prev,
+            passwordError: "Password must contain at least one number (0-9)",
+          }));
+        } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(value)) {
+          setFormError((prev) => ({
+            ...prev,
+            passwordError:
+              "Password must contain at least one special character",
+          }));
+        } else if (!/[A-Z]/.test(value)) {
+          setFormError((prev) => ({
+            ...prev,
+            passwordError:
+              "Password must contain at least one uppercase letter (A-Z)",
+          }));
+        }
       } else {
-        setFormError({
-          ...formError,
+        setFormError((prev) => ({
+          ...prev,
           passwordError: "Password is required",
-        });
+        }));
       }
     }
     if (name === "date_of_birth") {
@@ -93,15 +116,21 @@ const Signup = () => {
     }
     if (name === "confirm_password") {
       if (value.length > 0) {
-        setFormError({
-          ...formError,
+        setFormError((prev) => ({
+          ...prev,
           confirm_passwordError: "",
-        });
+        }));
+        if (value !== formData.password) {
+          setFormError((prev) => ({
+            ...prev,
+            confirm_passwordError: "Password must match",
+          }));
+        }
       } else {
-        setFormError({
-          ...formError,
-          confirm_passwordError: "Confirm Password is required",
-        });
+        setFormError((prev) => ({
+          ...prev,
+          confirm_passwordError: "Confirm password is required",
+        }));
       }
     }
   };
@@ -223,14 +252,25 @@ const Signup = () => {
             <p className="text-danger">{formError.full_nameError} </p>
           )}
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Control
-              type="text"
-              name="gender"
-              value={formData.gender}
-              onChange={handleChange}
-              placeholder="Gender"
-              className={formError.genderError ? "border-danger" : ""}
-            />
+            <div className="d-flex mt-3">
+              <Form.Check
+                type={"radio"}
+                id={`male`}
+                name="gender"
+                label={`Male`}
+                value={"Male"}
+                onChange={handleChange}
+              />
+              <Form.Check
+                type={"radio"}
+                id={`Female`}
+                name="gender"
+                label={`FeMale`}
+                value={"Female"}
+                className="ms-3"
+                onChange={handleChange}
+              />
+            </div>
           </Form.Group>
           {formError.genderError && (
             <p className="text-danger">{formError.genderError} </p>
@@ -292,7 +332,7 @@ const Signup = () => {
           </div>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Control
-              type="text"
+              type="date"
               name="date_of_birth"
               value={formData.date_of_birth}
               onChange={handleChange}

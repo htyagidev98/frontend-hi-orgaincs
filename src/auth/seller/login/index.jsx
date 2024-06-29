@@ -3,6 +3,7 @@ import { Form } from "react-bootstrap";
 import { FaArrowRight } from "react-icons/fa6";
 import "./index.css";
 import { NavLink, useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 const SellerLogin = () => {
   const [formData, setFormData] = useState({
     inputData: {
@@ -14,6 +15,8 @@ const SellerLogin = () => {
       password: "",
     },
   });
+  const [eye, setEye] = useState(false);
+
   const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -119,19 +122,36 @@ const SellerLogin = () => {
           {formData.inputError.email && (
             <p className="text-danger">{formData.inputError.email} </p>
           )}
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Enter Password</Form.Label>
-            <Form.Control
-              type="password"
-              value={formData.inputData.password}
-              onChange={handleChange}
-              name="password"
-              placeholder="Password"
-            />
-          </Form.Group>
-          {formData.inputError.password && (
-            <p className="text-danger">{formData.inputError.password} </p>
-          )}
+          <div className="position-relative">
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label>Enter Password</Form.Label>
+              <Form.Control
+                type={eye ? "text" : "password"}
+                value={formData.inputData.password}
+                onChange={handleChange}
+                name="password"
+                placeholder="Password"
+              />
+            </Form.Group>
+            {formData.inputError.password && (
+              <p className="text-danger">{formData.inputError.password} </p>
+            )}
+
+            <div
+              style={{
+                position: "absolute",
+                right: "10px",
+                top: "37px",
+                cursor: "pointer",
+              }}
+            >
+              {eye ? (
+                <FaEye onClick={() => setEye(!eye)} />
+              ) : (
+                <FaEyeSlash onClick={() => setEye(!eye)} />
+              )}
+            </div>
+          </div>
 
           <div className="d-flex justify-content-between align-items-center mt-5">
             <button type="button">
