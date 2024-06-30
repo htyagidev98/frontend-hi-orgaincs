@@ -25,6 +25,14 @@ import UserDetails from "./auth/user/setting/userDetails";
 import ChangePassword from "./auth/user/setting/changePassword";
 import SaveAddress from "./auth/user/setting/saveAddress";
 import AddressDetails from "./auth/seller/addressDetails";
+import Layout from "./pages/seller/layout";
+import Dashboard from "./pages/seller/dashboard";
+import Categories from "./pages/seller/categories";
+import Products from "./pages/seller/products";
+import Sales from "./pages/seller/sales";
+import Gateway from "./pages/seller/gateway";
+import Profile from "./pages/seller/profile";
+import AddProduct from "./pages/seller/addProduct";
 
 const App = () => {
   return (
@@ -142,6 +150,69 @@ const App = () => {
             <SellerAuthLayout>
               <GstDetails />
             </SellerAuthLayout>
+          }
+        />
+
+        <Route
+          path="/seller/dashboard"
+          element={
+            <Layout>
+              <Dashboard />
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/seller/categories"
+          element={
+            <Layout>
+              <Categories />
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/seller/products"
+          element={
+            <Layout>
+              <Products />
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/seller/sales"
+          element={
+            <Layout>
+              <Sales />
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/seller/gateway"
+          element={
+            <Layout>
+              <Gateway />
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/seller/profile"
+          element={
+            <Layout>
+              <Profile />
+            </Layout>
+          }
+        />
+
+        <Route
+          path="/seller/addproduct"
+          element={
+            <Layout>
+              <AddProduct />
+            </Layout>
           }
         />
       </Routes>

@@ -1,0 +1,79 @@
+.sellerLayoutWrapper {
+  display: flex;
+}
+
+.sellerLayoutWrapper .sidebar {
+  height: 100vh;
+  background-color: rgba(77, 68, 181, 1);
+  width: 20%;
+}
+
+.sellerLayoutWrapper .sidebar .logosection {
+  padding: 60px 30px 40px 30px;
+}
+
+.sellerLayoutWrapper .sidebar .logosection span {
+  margin-left: 29px;
+  color: rgba(255, 255, 255, 1);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.sellerLayoutWrapper .sidebar ul li a {
+  color: rgba(221, 221, 221, 1);
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.sellerLayoutWrapper .sidebar ul li a .icon_span {
+  color: rgba(221, 221, 221, 1);
+  font-size: 20px !important;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.linkactive {
+  background-color: rgba(217, 215, 249, 1);
+}
+
+.text_danger {
+  color: rgba(77, 68, 181, 1) !important;
+  font-weight: bolder;
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+.sellerLayoutWrapper .sidebar ul {
+  padding-left: 8px !important;
+}
+
+.sellerLayoutWrapper .sidebar ul li {
+  padding: 8px 16px;
+  margin-bottom: 8px;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  transition: all 0.3s linear;
+}
+
+.sellerLayoutWrapper .maincontainer {
+  width: 80%;
+  background-color: rgba(217, 215, 249, 1);
+}
+
+.sellerLayoutWrapper .maincontainer .header input {
+  width: 520px;
+  padding: 5px 18px;
+  border: 1px solid rgba(246, 246, 246, 1);
+  outline: none;
+}
+
+.sellerLayoutWrapper .header .heading {
+  background-color: rgba(228, 232, 255, 1);
+  border: 1px solid rgba(221, 221, 221, 1);
+  padding: 7px 32px;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-top: 10px;
+}

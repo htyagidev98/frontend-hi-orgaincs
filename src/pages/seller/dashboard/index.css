@@ -1,0 +1,47 @@
+.dashboardWrapper .leftsection {
+  display: flex;
+  align-items: center;
+}
+
+.dashboardWrapper .leftsection span {
+  color: rgba(119, 119, 119, 1);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.dashboardWrapper .rightsection {
+  display: flex;
+  align-items: center;
+}
+
+.dashboardWrapper .rightsection .callendersection {
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 5px;
+  padding-left: 9px;
+  width: 310px;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.dashboardWrapper .rightsection a {
+  border-radius: 5px;
+  padding: 6px 30px 6px 30px;
+  background-color: rgba(63, 129, 224, 0.5);
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: 1px;
+  color: rgba(23, 70, 162, 1);
+}
+
+.dashboardWrapper .rightsection .callendersection .calender_span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(63, 129, 224, 1);
+  width: 51px;
+  height: 40px !important;
+  color: #ffff;
+  cursor: pointer;
+}

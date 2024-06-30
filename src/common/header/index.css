@@ -107,6 +107,13 @@
   padding: 0px 50px;
 }
 
+.pos {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+
 .header_wrapper .end_header .left_data .all_category_dropdown {
   background-color: green;
   color: #ffffff;
