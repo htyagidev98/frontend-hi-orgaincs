@@ -1,6 +1,9 @@
 .sellerLayoutWrapper {
   display: flex;
 }
+.sellerLayoutWrapper .maininner {
+  padding: 20px;
+}
 
 .sellerLayoutWrapper .sidebar {
   height: 100vh;

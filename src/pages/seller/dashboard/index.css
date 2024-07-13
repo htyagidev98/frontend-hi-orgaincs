@@ -45,3 +45,41 @@
   color: #ffff;
   cursor: pointer;
 }
+
+.dashboardWrapper .dashinfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* padding: 23px; */
+  margin-top: 30px;
+}
+
+.dashboardWrapper .dashinfo .inner_card {
+  background-color: #ffff;
+  border-radius: 15px;
+  padding: 20px;
+  width: 350px;
+}
+
+.dashboardWrapper .topdata .total_heading {
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: 1px;
+  color: rgba(85, 85, 85, 1);
+}
+
+.dashboardWrapper .bottomdata .value_heading {
+  font-weight: 700;
+  font-size: 32px;
+  letter-spacing: 1px;
+}
+
+.dashboardWrapper .inner_card .topdata .chart_icon_span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  background-color: rgba(255, 115, 29, 0.3);
+}
