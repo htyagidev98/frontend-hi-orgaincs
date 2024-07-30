@@ -30,9 +30,14 @@ import Dashboard from "./pages/seller/dashboard";
 import Categories from "./pages/seller/categories";
 import Products from "./pages/seller/products";
 import Sales from "./pages/seller/sales";
-import Gateway from "./pages/seller/gateway";
 import Profile from "./pages/seller/profile";
 import AddProduct from "./pages/seller/addProduct";
+import Account from "./pages/seller/account";
+import HelpCenter from "./pages/seller/profile";
+import LicenseEntry from "./pages/seller/licenseEntry";
+import AddProductDetails from "./pages/seller/addProductDetails";
+import Earnings from "./pages/seller/earnings";
+import Orders from "./pages/seller/orders";
 
 const App = () => {
   return (
@@ -190,28 +195,60 @@ const App = () => {
         />
 
         <Route
-          path="/seller/gateway"
+          path="/seller/account"
           element={
             <Layout>
-              <Gateway />
+              <Account />
             </Layout>
           }
         />
 
         <Route
-          path="/seller/profile"
+          path="/seller/helpcenter"
           element={
             <Layout>
-              <Profile />
+              <HelpCenter />
             </Layout>
           }
         />
 
         <Route
-          path="/seller/addproduct"
+          path="/seller/add/products"
           element={
             <Layout>
               <AddProduct />
+            </Layout>
+          }
+        />
+        <Route
+          path="/seller/licenseentry"
+          element={
+            <Layout>
+              <LicenseEntry />
+            </Layout>
+          }
+        />
+        <Route
+          path="/seller/addproductdetails"
+          element={
+            <Layout>
+              <AddProductDetails />
+            </Layout>
+          }
+        />
+        <Route
+          path="/seller/earnings"
+          element={
+            <Layout>
+              <Earnings />
+            </Layout>
+          }
+        />
+        <Route
+          path="/seller/orders"
+          element={
+            <Layout>
+              <Orders />
             </Layout>
           }
         />

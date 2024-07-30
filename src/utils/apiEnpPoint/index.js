@@ -13,6 +13,7 @@ const ApiEndPoint = {
   SellerAddressDetails: "/address/sellerAddress",
   SellerBankDetails: "/seller/bankAccount",
   SellerGstDetails: "/seller/gstCreate",
+  SellerLogin: "/seller/loginSeller",
 };
 
 export default ApiEndPoint;

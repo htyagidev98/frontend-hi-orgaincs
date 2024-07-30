@@ -4,6 +4,11 @@ import { FaArrowRight } from "react-icons/fa6";
 import "./index.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import ApiEndPoint from "../../../utils/apiEnpPoint";
+import axios from "axios";
+import { BASE_URL } from "../../../utils/helper";
+import { toast } from "react-toastify";
+import ButtonLoader from "../../../component/buttonLoader";
 const SellerLogin = () => {
   const [formData, setFormData] = useState({
     inputData: {
@@ -15,6 +20,8 @@ const SellerLogin = () => {
       password: "",
     },
   });
+  const [loading, setLoading] = useState(false);
+
   const [eye, setEye] = useState(false);
 
   const navigate = useNavigate();
@@ -69,7 +76,7 @@ const SellerLogin = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.inputData.email && !formData.inputData.password) {
@@ -99,8 +106,23 @@ const SellerLogin = () => {
       }));
     } else {
       if (formData.inputData.email && formData.inputData.password) {
-        console.log(formData.inputData);
-        navigate("/seller/varifyloginotp");
+        try {
+          setLoading(true);
+          const res = await axios.post(
+            `${BASE_URL}${ApiEndPoint.SellerLogin}`,
+            formData?.inputData
+          );
+          setLoading(false);
+          if (res.status === 200) {
+            toast.success(res?.data?.message);
+            navigate("/seller/varifyloginotp");
+            localStorage.setItem("selertoken", res?.data?.data?.accessToken);
+          }
+        } catch (error) {
+          toast.error(error?.response?.data?.message);
+          setLoading(false);
+          console.log(error, "error");
+        }
       }
     }
   };
@@ -167,7 +189,13 @@ const SellerLogin = () => {
           <div className="mt-5 text-center">
             {" "}
             <button type="submit">
-              Login <FaArrowRight className="ms-2 mb-1" />
+              {loading ? (
+                <ButtonLoader />
+              ) : (
+                <span>
+                  Login <FaArrowRight className="ms-2 mb-1" />
+                </span>
+              )}
             </button>
           </div>
         </Form>

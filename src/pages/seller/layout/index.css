@@ -1,5 +1,6 @@
 .sellerLayoutWrapper {
   display: flex;
+  background-color: rgba(245, 245, 245, 1) !important;
 }
 .sellerLayoutWrapper .maininner {
   padding: 20px;
@@ -7,8 +8,13 @@
 
 .sellerLayoutWrapper .sidebar {
   height: 100vh;
-  background-color: rgba(77, 68, 181, 1);
+  /* background-color: rgba(77, 68, 181, 1); */
+  background-color: rgba(76, 175, 80, 1);
   width: 20%;
+  position: fixed;
+  border-radius: 0px 20px 20px 0px;
+  top: 0;
+  left: 0;
 }
 
 .sellerLayoutWrapper .sidebar .logosection {
@@ -23,7 +29,7 @@
 }
 
 .sellerLayoutWrapper .sidebar ul li a {
-  color: rgba(221, 221, 221, 1);
+  color: rgba(255, 255, 255, 1);
   font-size: 18px;
   font-weight: 400;
   letter-spacing: 1px;
@@ -36,15 +42,28 @@
   letter-spacing: 1px;
 }
 
+.sellerLayoutWrapper .sidebar ul li {
+  transition: all 0.3s linear !important;
+}
+
+.sellerLayoutWrapper .sidebar ul li:hover {
+  background-color: black;
+}
+.sellerLayoutWrapper .sidebar ul li:hover a {
+  color: #fff !important;
+}
 .linkactive {
-  background-color: rgba(217, 215, 249, 1);
+  /* background-color: rgba(217, 215, 249, 1); */
+  background-color: rgba(245, 245, 245, 1);
 }
 
 .text_danger {
-  color: rgba(77, 68, 181, 1) !important;
+  /* color: rgba(77, 68, 181, 1) !important; */
+  color: rgba(76, 175, 80, 1) !important;
   font-weight: bolder;
   font-size: 20px;
   letter-spacing: 1px;
+  font-weight: 700 !important;
 }
 
 .sellerLayoutWrapper .sidebar ul {
@@ -61,7 +80,8 @@
 
 .sellerLayoutWrapper .maincontainer {
   width: 80%;
-  background-color: rgba(217, 215, 249, 1);
+  /* background-color: rgba(217, 215, 249, 1); */
+  margin-left: auto;
 }
 
 .sellerLayoutWrapper .maincontainer .header input {

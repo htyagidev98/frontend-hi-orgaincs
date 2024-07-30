@@ -1,16 +1,16 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
 
-const BarChart = ({ chartState }) => {
+const MultipleRadial = ({ chartState }) => {
   return (
     <ReactApexChart
       options={chartState.options}
       series={chartState.series}
-      type="bar"
+      type="radialBar"
       // width={500}
       height={350}
     />
   );
 };
 
-export default BarChart;
+export default MultipleRadial;

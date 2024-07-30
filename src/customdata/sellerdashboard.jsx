@@ -2,9 +2,10 @@ import { MdSpaceDashboard } from "react-icons/md";
 import { MdOutlineVpnLock } from "react-icons/md";
 import { MdProductionQuantityLimits } from "react-icons/md";
 import { VscGraph } from "react-icons/vsc";
-import { GrGateway } from "react-icons/gr";
 import { CgProfile } from "react-icons/cg";
 import { MdFormatListBulletedAdd } from "react-icons/md";
+import { IoBarChartSharp } from "react-icons/io5";
+import { FaJediOrder } from "react-icons/fa6";
 
 const sellersidebardata = [
   {
@@ -12,6 +13,25 @@ const sellersidebardata = [
 
     label: "Dashboard",
     icon: <MdSpaceDashboard />,
+  },
+  {
+    link: "/seller/orders",
+
+    label: "Orders",
+    icon: <FaJediOrder />,
+  },
+  {
+    link: "/seller/products",
+
+    label: "Products",
+    icon: <MdProductionQuantityLimits />,
+  },
+
+  {
+    link: "/seller/add/products",
+
+    label: "Add Products",
+    icon: <MdProductionQuantityLimits />,
   },
 
   {
@@ -21,33 +41,28 @@ const sellersidebardata = [
     icon: <MdOutlineVpnLock />,
   },
   {
-    link: "/seller/products",
+    link: "/seller/earnings",
 
-    label: "Products",
-    icon: <MdProductionQuantityLimits />,
+    label: "Earnings",
+    icon: <IoBarChartSharp />,
   },
+
   {
     link: "/seller/sales",
 
     label: "Sales",
     icon: <VscGraph />,
   },
-  {
-    link: "/seller/gateway",
 
-    label: "Gateway",
-    icon: <GrGateway />,
-  },
   {
-    link: "/seller/profile",
+    link: "/seller/account",
 
-    label: "Profile",
+    label: "My Account",
     icon: <CgProfile />,
   },
   {
-    link: "/seller/addproduct",
-
-    label: "Add Product",
+    link: "/seller/helpcenter",
+    label: "Help Center",
     icon: <MdFormatListBulletedAdd />,
   },
 ];
