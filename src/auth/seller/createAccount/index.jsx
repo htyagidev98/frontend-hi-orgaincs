@@ -102,7 +102,7 @@ const CreateSellerAccount = () => {
               name="otporemail"
               value={formData.inputData.otporemail}
               onChange={handleChange}
-              placeholder="Enter otp or email"
+              placeholder="Enter phone number or email"
             />
           </Form.Group>
           {formData.inputError.otporemail && (

@@ -331,7 +331,7 @@ const AddressDetails = () => {
       }));
     } else {
       const payload = {
-        user_id: "667803ec4668e9a19215ca2a",
+        user_id: state?.main,
         contact_no: formData?.inputData.phone,
         alternateContact_no: formData?.inputData?.alt_phone,
         name: formData?.inputData?.full_name,

@@ -106,17 +106,29 @@ const SellerLogin = () => {
       }));
     } else {
       if (formData.inputData.email && formData.inputData.password) {
+        const payload = {
+          user: formData?.inputData?.email,
+          password: formData?.inputData?.password,
+        };
         try {
           setLoading(true);
           const res = await axios.post(
             `${BASE_URL}${ApiEndPoint.SellerLogin}`,
-            formData?.inputData
+            payload
           );
           setLoading(false);
           if (res.status === 200) {
             toast.success(res?.data?.message);
-            navigate("/seller/varifyloginotp");
-            localStorage.setItem("selertoken", res?.data?.data?.accessToken);
+            if (res?.data?.data?.accessToken) {
+              navigate("/seller/dashboard");
+              localStorage.setItem("selertoken", res?.data?.data?.accessToken);
+            } else {
+              navigate("/seller/varifyloginotp", {
+                state: {
+                  main: res.data?.data?.user_id,
+                },
+              });
+            }
           }
         } catch (error) {
           toast.error(error?.response?.data?.message);
