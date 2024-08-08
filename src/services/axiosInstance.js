@@ -7,7 +7,7 @@ const axiosInstance = axios.create({
 const requestHandler = async (request) => {
   const accessToken = localStorage.getItem("token");
   try {
-    request.headers["Authorization"] = "Bearer " + accessToken;
+    request.headers["Authorization"] = accessToken;
   } catch (e) {
     console.log(e, "err");
   }
@@ -22,10 +22,7 @@ axiosInstance.interceptors.request.use(requestHandler, (error) => {
 });
 axiosInstance.interceptors.response.use(responseHandler, async (error) => {
   console.log("intercepter console", error);
-  if (error?.response?.status === 401) {
-    localStorage.removeItem("token");
-    window.location.href = navigationLink.login;
-  }
+
   return Promise.reject(error);
 });
 export default axiosInstance;

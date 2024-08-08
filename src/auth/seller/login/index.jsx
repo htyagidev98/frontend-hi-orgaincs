@@ -121,7 +121,7 @@ const SellerLogin = () => {
             toast.success(res?.data?.message);
             if (res?.data?.data?.accessToken) {
               navigate("/seller/dashboard");
-              localStorage.setItem("selertoken", res?.data?.data?.accessToken);
+              localStorage.setItem("token", res?.data?.data?.accessToken);
             } else {
               navigate("/seller/varifyloginotp", {
                 state: {

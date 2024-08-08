@@ -15,6 +15,7 @@ const ApiEndPoint = {
   SellerGstDetails: "/seller/gstCreate",
   SellerLogin: "/seller/loginSeller",
   SellerTwoStep: "/seller/twostepLogin",
+  SellerCategoryList: "/product/categoryList",
 };
 
 export default ApiEndPoint;

@@ -200,6 +200,7 @@ export const GstDetails = () => {
                   onChange={handleChange}
                   placeholder="Enter Gst number"
                   value={formData.inputData.Gst_Number}
+                  className="text-uppercase"
                 />
               </Form.Group>
               {formData.inputError.Gst_Number && (
@@ -218,6 +219,7 @@ export const GstDetails = () => {
                   onChange={handleChange}
                   placeholder="Enter pan number"
                   value={formData.inputData.Pan_Number}
+                  className="text-uppercase"
                 />
               </Form.Group>
               {formData.inputError.Pan_Number && (
