@@ -16,6 +16,9 @@ const ApiEndPoint = {
   SellerLogin: "/seller/loginSeller",
   SellerTwoStep: "/seller/twostepLogin",
   SellerCategoryList: "/product/categoryList",
+  SellerLicenceCheck: "/product/licenseCheck?category_id=",
+  SellerAddLicence: "/product/addLicense",
+  SellerAddProduct: "",
 };
 
 export default ApiEndPoint;

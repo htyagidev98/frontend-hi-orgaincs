@@ -38,6 +38,8 @@ import LicenseEntry from "./pages/seller/licenseEntry";
 import AddProductDetails from "./pages/seller/addProductDetails";
 import Earnings from "./pages/seller/earnings";
 import Orders from "./pages/seller/orders";
+import ProtectedRouteForSeller from "./component/protectedRouteForSeller";
+import PublicRouteForSeller from "./component/publicRouteForSeller";
 
 const App = () => {
   return (
@@ -89,167 +91,205 @@ const App = () => {
         <Route
           path="/seller/login"
           element={
-            <SellerAuthLayout>
-              <SellerLogin />
-            </SellerAuthLayout>
+            <PublicRouteForSeller>
+              <SellerAuthLayout>
+                <SellerLogin />
+              </SellerAuthLayout>
+            </PublicRouteForSeller>
           }
         />
 
         <Route
           path="/seller/varifyloginotp"
           element={
-            <SellerAuthLayout>
-              <VarifyLoginOTPForSeller />
-            </SellerAuthLayout>
+            <PublicRouteForSeller>
+              <SellerAuthLayout>
+                <VarifyLoginOTPForSeller />
+              </SellerAuthLayout>
+            </PublicRouteForSeller>
           }
         />
 
         <Route
           path="/seller/createaccount"
           element={
-            <SellerAuthLayout>
-              <CreateSellerAccount />
-            </SellerAuthLayout>
+            <PublicRouteForSeller>
+              <SellerAuthLayout>
+                <CreateSellerAccount />
+              </SellerAuthLayout>
+            </PublicRouteForSeller>
           }
         />
 
         <Route
           path="/seller/signup/verifyotp"
           element={
-            <SellerAuthLayout>
-              <VerifySignupOtpForSeller />
-            </SellerAuthLayout>
+            <PublicRouteForSeller>
+              <SellerAuthLayout>
+                <VerifySignupOtpForSeller />
+              </SellerAuthLayout>
+            </PublicRouteForSeller>
           }
         />
 
         <Route
           path="/seller/shopdetails"
           element={
-            <SellerAuthLayout>
-              <ShopDetails />
-            </SellerAuthLayout>
+            <PublicRouteForSeller>
+              <SellerAuthLayout>
+                <ShopDetails />
+              </SellerAuthLayout>
+            </PublicRouteForSeller>
           }
         />
 
         <Route
           path="/seller/addressdetails"
           element={
-            <SellerAuthLayout>
-              <AddressDetails />
-            </SellerAuthLayout>
+            <PublicRouteForSeller>
+              <SellerAuthLayout>
+                <AddressDetails />
+              </SellerAuthLayout>
+            </PublicRouteForSeller>
           }
         />
 
         <Route
           path="/seller/bankdetails"
           element={
-            <SellerAuthLayout>
-              <BankDetails />
-            </SellerAuthLayout>
+            <PublicRouteForSeller>
+              <SellerAuthLayout>
+                <BankDetails />
+              </SellerAuthLayout>
+            </PublicRouteForSeller>
           }
         />
 
         <Route
           path="/seller/gstdetails"
           element={
-            <SellerAuthLayout>
-              <GstDetails />
-            </SellerAuthLayout>
+            <PublicRouteForSeller>
+              <SellerAuthLayout>
+                <GstDetails />
+              </SellerAuthLayout>
+            </PublicRouteForSeller>
           }
         />
 
         <Route
           path="/seller/dashboard"
           element={
-            <Layout>
-              <Dashboard />
-            </Layout>
+            <ProtectedRouteForSeller>
+              <Layout>
+                <Dashboard />
+              </Layout>
+            </ProtectedRouteForSeller>
           }
         />
 
         <Route
           path="/seller/categories"
           element={
-            <Layout>
-              <Categories />
-            </Layout>
+            <ProtectedRouteForSeller>
+              <Layout>
+                <Categories />
+              </Layout>
+            </ProtectedRouteForSeller>
           }
         />
 
         <Route
           path="/seller/products"
           element={
-            <Layout>
-              <Products />
-            </Layout>
+            <ProtectedRouteForSeller>
+              <Layout>
+                <Products />
+              </Layout>
+            </ProtectedRouteForSeller>
           }
         />
 
         <Route
           path="/seller/sales"
           element={
-            <Layout>
-              <Sales />
-            </Layout>
+            <ProtectedRouteForSeller>
+              <Layout>
+                <Sales />
+              </Layout>
+            </ProtectedRouteForSeller>
           }
         />
 
         <Route
           path="/seller/account"
           element={
-            <Layout>
-              <Account />
-            </Layout>
+            <ProtectedRouteForSeller>
+              <Layout>
+                <Account />
+              </Layout>
+            </ProtectedRouteForSeller>
           }
         />
 
         <Route
           path="/seller/helpcenter"
           element={
-            <Layout>
-              <HelpCenter />
-            </Layout>
+            <ProtectedRouteForSeller>
+              <Layout>
+                <HelpCenter />
+              </Layout>
+            </ProtectedRouteForSeller>
           }
         />
 
         <Route
           path="/seller/add/products"
           element={
-            <Layout>
-              <AddProduct />
-            </Layout>
+            <ProtectedRouteForSeller>
+              <Layout>
+                <AddProduct />
+              </Layout>
+            </ProtectedRouteForSeller>
           }
         />
         <Route
           path="/seller/licenseentry"
           element={
-            <Layout>
-              <LicenseEntry />
-            </Layout>
+            <ProtectedRouteForSeller>
+              <Layout>
+                <LicenseEntry />
+              </Layout>
+            </ProtectedRouteForSeller>
           }
         />
         <Route
           path="/seller/addproductdetails"
           element={
-            <Layout>
-              <AddProductDetails />
-            </Layout>
+            <ProtectedRouteForSeller>
+              <Layout>
+                <AddProductDetails />
+              </Layout>
+            </ProtectedRouteForSeller>
           }
         />
         <Route
           path="/seller/earnings"
           element={
-            <Layout>
-              <Earnings />
-            </Layout>
+            <ProtectedRouteForSeller>
+              <Layout>
+                <Earnings />
+              </Layout>
+            </ProtectedRouteForSeller>
           }
         />
         <Route
           path="/seller/orders"
           element={
-            <Layout>
-              <Orders />
-            </Layout>
+            <ProtectedRouteForSeller>
+              <Layout>
+                <Orders />
+              </Layout>
+            </ProtectedRouteForSeller>
           }
         />
       </Routes>

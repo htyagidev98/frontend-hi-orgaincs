@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { MdOutlineFileUpload } from "react-icons/md";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import axiosInstance from "../../../services/axiosInstance";
+import ApiEndPoint from "../../../utils/apiEnpPoint";
+import ButtonLoader from "../../../component/buttonLoader";
 
 const LicenseEntry = () => {
+  const { state } = useLocation();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     inputData: {
       firmName: "",
@@ -98,7 +105,7 @@ const LicenseEntry = () => {
       console.log(formData.inputData);
     }
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (
       !formData.inputData.firmName &&
@@ -169,6 +176,15 @@ const LicenseEntry = () => {
         },
       }));
     } else {
+      const payload = {
+        firmName: formData.inputData.firmName,
+        licenseNumber: formData.inputData.licenceNumber,
+        issueState: formData.inputData.licenceState,
+        issueDate: formData.inputData.issueDate,
+        expireDate: formData.inputData.expiryDate,
+        user_file: formData.inputData.pdfFile,
+        category_id: state?.main,
+      };
       if (
         formData.inputData.firmName &&
         formData.inputData.licenceNumber &&
@@ -177,7 +193,27 @@ const LicenseEntry = () => {
         formData.inputData.expiryDate &&
         formData.inputData.pdfFile
       ) {
-        console.log(formData.inputData);
+        try {
+          setLoading(true);
+          const res = await axiosInstance.post(
+            ApiEndPoint.SellerAddLicence,
+            payload,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            }
+          );
+          if (res?.status === 200) {
+            toast.success(res?.data?.message);
+            navigate("/seller/add/products");
+          }
+          setLoading(false);
+        } catch (error) {
+          toast.error(error.response.data.message);
+          console.log(error);
+          setLoading(false);
+        }
       }
     }
   };
@@ -359,7 +395,7 @@ const LicenseEntry = () => {
                 fontWeight: "600",
               }}
             >
-              Verify
+              {loading ? <ButtonLoader /> : "Verify"}
             </button>
           </div>
         </Form>

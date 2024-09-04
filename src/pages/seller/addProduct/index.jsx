@@ -8,14 +8,34 @@ import ApiEndPoint from "../../../utils/apiEnpPoint";
 import DataLoader from "../../../component/dataLoader";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import axiosInstance from "../../../services/axiosInstance";
 const AddProduct = () => {
   const { loading, responseData } = useGetData(ApiEndPoint.SellerCategoryList);
   const navigate = useNavigate();
+
+  const getLicenceStatus = async (selectedId) => {
+    try {
+      const res = await axiosInstance.get(
+        `${ApiEndPoint.SellerLicenceCheck}${selectedId}`
+      );
+      if (res?.data?.data.isLicense === "processing") {
+        toast.error(res?.data?.message);
+      } else if (!res?.data?.data?.isLicense) {
+        navigate("/seller/licenseentry", {
+          state: {
+            main: res.data?.data?.category_id,
+          },
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const categoryNavigateHandler = (selectedCategory) => {
     if (!selectedCategory.license) {
       navigate("/seller/addproductdetails");
     } else {
-      toast.success("Under Construction");
+      getLicenceStatus(selectedCategory?._id);
     }
   };
   if (loading) {
@@ -51,7 +71,9 @@ const AddProduct = () => {
                   className="text-white fw-bold text-capitalize"
                   style={{ position: "absolute", bottom: "10px", left: "50px" }}
                 >
-                  {curElm?.category_name}
+                  {curElm?.category_name === "pots_plats"
+                    ? "Pots Plants"
+                    : curElm?.category_name}
                 </h5>
               </div>
             </div>

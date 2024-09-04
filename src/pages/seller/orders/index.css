@@ -1,0 +1,21 @@
+.order_wrapper .innerdata {
+  padding: 10px;
+  border-radius: 16px;
+  background-color: rgba(251, 251, 251, 1);
+}
+
+.order_wrapper .delevereddata .inner {
+  border: 2px solid lightgray;
+  border-radius: 16px;
+}
+
+.border_bottom {
+  border-bottom: 2px solid lightgray;
+}
+
+.location_tracker .tracker-container .tracker-line {
+  height: 10px;
+  width: 10px;
+  background-color: rgba(76, 175, 80, 1);
+  border-radius: 50%;
+}

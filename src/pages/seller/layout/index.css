@@ -1,20 +1,27 @@
 .sellerLayoutWrapper {
-  display: flex;
   background-color: rgba(245, 245, 245, 1) !important;
 }
 .sellerLayoutWrapper .maininner {
-  padding: 20px;
+  padding: 5px 20px;
+}
+
+.sellerLayoutWrapper header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  padding: 10px;
+  background-color: rgba(245, 245, 245, 1);
 }
 
 .sellerLayoutWrapper .sidebar {
-  height: 100vh;
-  /* background-color: rgba(77, 68, 181, 1); */
+  height: 83vh;
   background-color: rgba(76, 175, 80, 1);
   width: 20%;
   position: fixed;
-  border-radius: 0px 20px 20px 0px;
-  top: 0;
+  top: 73px;
   left: 0;
+  overflow-y: auto;
 }
 
 .sellerLayoutWrapper .sidebar .logosection {
@@ -53,12 +60,10 @@
   color: #fff !important;
 }
 .linkactive {
-  /* background-color: rgba(217, 215, 249, 1); */
   background-color: rgba(245, 245, 245, 1);
 }
 
 .text_danger {
-  /* color: rgba(77, 68, 181, 1) !important; */
   color: rgba(76, 175, 80, 1) !important;
   font-weight: bolder;
   font-size: 20px;
@@ -71,10 +76,11 @@
 }
 
 .sellerLayoutWrapper .sidebar ul li {
-  padding: 8px 16px;
+  padding: 6px 16px;
   margin-bottom: 8px;
   border-top-left-radius: 25px;
   border-bottom-left-radius: 25px;
+  margin-bottom: 10px;
   transition: all 0.3s linear;
 }
 
