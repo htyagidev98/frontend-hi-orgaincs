@@ -30,6 +30,7 @@ const Layout = ({ children }) => {
                   <Link
                     to={curElm.link}
                     className={pathname === curElm.link ? "text_danger" : ""}
+                    style={{ display: "flex" }}
                   >
                     <span
                       className={
@@ -38,7 +39,7 @@ const Layout = ({ children }) => {
                     >
                       {curElm.icon}{" "}
                     </span>{" "}
-                    <span>{curElm.label} </span>{" "}
+                    <span style={{ marginTop: "2px" }}>{curElm.label} </span>{" "}
                   </Link>
                 </li>
                 {index === 6 && (

@@ -13,14 +13,25 @@ const AddProduct = () => {
   const { loading, responseData } = useGetData(ApiEndPoint.SellerCategoryList);
   const navigate = useNavigate();
 
-  const getLicenceStatus = async (selectedId) => {
+  const getLicenceStatus = async (selectedCategory) => {
     try {
       const res = await axiosInstance.get(
-        `${ApiEndPoint.SellerLicenceCheck}${selectedId}`
+        `${ApiEndPoint.SellerLicenceCheck}${selectedCategory._id}`
       );
+
+      if (res?.data?.data?.isLicense) {
+        navigate("/seller/addproductdetails", {
+          state: {
+            category_id: res?.data?.data?.category_id,
+            license_id: res?.data?.data?.license_id,
+          },
+        });
+      }
+
       if (res?.data?.data.isLicense === "processing") {
         toast.error(res?.data?.message);
-      } else if (!res?.data?.data?.isLicense) {
+      }
+      if (!res?.data?.data?.isLicense) {
         navigate("/seller/licenseentry", {
           state: {
             main: res.data?.data?.category_id,
@@ -33,9 +44,14 @@ const AddProduct = () => {
   };
   const categoryNavigateHandler = (selectedCategory) => {
     if (!selectedCategory.license) {
-      navigate("/seller/addproductdetails");
+      navigate("/seller/addproductdetails", {
+        state: {
+          category_id: selectedCategory?._id,
+          license_id: null,
+        },
+      });
     } else {
-      getLicenceStatus(selectedCategory?._id);
+      getLicenceStatus(selectedCategory);
     }
   };
   if (loading) {

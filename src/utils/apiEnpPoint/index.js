@@ -18,7 +18,7 @@ const ApiEndPoint = {
   SellerCategoryList: "/product/categoryList",
   SellerLicenceCheck: "/product/licenseCheck?category_id=",
   SellerAddLicence: "/product/addLicense",
-  SellerAddProduct: "",
+  SellerAddCatProduct: "/product/addCatlog",
 };
 
 export default ApiEndPoint;
